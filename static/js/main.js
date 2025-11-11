@@ -1,267 +1,628 @@
-// Aura Website Interactive Features
+// ====================================
+// AURA - Enhanced Animation System
+// Featuring anime.js + GSAP + Three.js
+// ====================================
+
 document.addEventListener('DOMContentLoaded', function() {
+  
+  // ====================================
+  // PAGE LOADER WITH ANIME.JS
+  // ====================================
+  const pageLoader = document.createElement('div');
+  pageLoader.className = 'page-loader';
+  pageLoader.innerHTML = `
+    <div class="loader-logo">
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+    </div>
+  `;
+  document.body.prepend(pageLoader);
+
+  // Animate loader rings with anime.js
+  if (typeof anime !== 'undefined') {
+    anime({
+      targets: '.loader-ring',
+      rotate: 360,
+      duration: 1000,
+      loop: true,
+      easing: 'linear',
+      delay: anime.stagger(200)
+    });
+
+    // Hide loader after page loads
+    window.addEventListener('load', () => {
+      anime({
+        targets: '.page-loader',
+        opacity: 0,
+        duration: 800,
+        easing: 'easeOutQuad',
+        complete: () => {
+          pageLoader.classList.add('hidden');
+          setTimeout(() => pageLoader.remove(), 500);
+          initPageAnimations();
+        }
+      });
+    });
+  } else {
+    // Fallback if anime.js doesn't load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        pageLoader.classList.add('hidden');
+        setTimeout(() => pageLoader.remove(), 500);
+        initPageAnimations();
+      }, 800);
+    });
+  }
+
+  // ====================================
+  // SMOOTH SCROLLING - LENIS
+  // ====================================
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    mouseMultiplier: 1,
+    smoothTouch: false,
+    touchMultiplier: 2,
+    infinite: false,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // ====================================
+  // GSAP + SCROLLTRIGGER SETUP
+  // ====================================
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.defaults({
+    scroller: document.body
+  });
+
+  // ====================================
+  // 3D PARTICLES WITH THREE.JS
+  // ====================================
+  if (typeof THREE !== 'undefined') {
+    const canvas = document.createElement('canvas');
+    canvas.id = 'particles-canvas';
+    document.body.prepend(canvas);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     
-    // Initialize all animations
-    initAnimations();
-    initScrollEffects();
-    initHoverEffects();
-    initNavbarEffects();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    camera.position.z = 5;
+
+    // Create particle system
+    const particleCount = 500;
+    const particles = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 20;
+      positions[i + 1] = (Math.random() - 0.5) * 20;
+      positions[i + 2] = (Math.random() - 0.5) * 10;
+
+      // Purple to pink gradient
+      const color = new THREE.Color();
+      color.setHSL(Math.random() * 0.1 + 0.75, 1, 0.6);
+      colors[i] = color.r;
+      colors[i + 1] = color.g;
+      colors[i + 2] = color.b;
+    }
+
+    particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const particleMaterial = new THREE.PointsMaterial({
+      size: 0.05,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particleSystem = new THREE.Points(particles, particleMaterial);
+    scene.add(particleSystem);
+
+    // Animate particles
+    function animateParticles() {
+      requestAnimationFrame(animateParticles);
+      
+      particleSystem.rotation.x += 0.0005;
+      particleSystem.rotation.y += 0.001;
+
+      const positions = particleSystem.geometry.attributes.position.array;
+      for (let i = 1; i < positions.length; i += 3) {
+        positions[i] += Math.sin(Date.now() * 0.001 + i) * 0.001;
+      }
+      particleSystem.geometry.attributes.position.needsUpdate = true;
+
+      renderer.render(scene, camera);
+    }
+    animateParticles();
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
+
+  // ====================================
+  // CUSTOM CURSOR
+  // ====================================
+  const cursor = document.getElementById('custom-cursor');
+  const cursorDot = document.getElementById('cursor-dot');
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (cursor && cursorDot && !isTouchDevice) {
+    document.body.classList.add('no-cursor');
+    cursor.style.opacity = '0';
+    cursorDot.style.opacity = '0';
+
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    let dotX = 0, dotY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      if (cursor.style.opacity === '0') {
+        cursor.style.opacity = '1';
+        cursorDot.style.opacity = '1';
+      }
+    });
+
+    function animateCursor() {
+      const speed = 0.15;
+      const dotSpeed = 0.3;
+
+      cursorX += (mouseX - cursorX) * speed;
+      cursorY += (mouseY - cursorY) * speed;
+      dotX += (mouseX - dotX) * dotSpeed;
+      dotY += (mouseY - dotY) * dotSpeed;
+
+      cursor.style.left = cursorX + 'px';
+      cursor.style.top = cursorY + 'px';
+      cursorDot.style.left = dotX + 'px';
+      cursorDot.style.top = dotY + 'px';
+
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    const interactiveElements = document.querySelectorAll('a, button, .btn, .card, .service-card, .feature-box, input, textarea, select');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('cursor-hover');
+        cursorDot.classList.add('cursor-hover');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('cursor-hover');
+        cursorDot.classList.remove('cursor-hover');
+      });
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+      cursorDot.style.opacity = '0';
+    });
+  } else if (isTouchDevice) {
+    if (cursor) cursor.style.display = 'none';
+    if (cursorDot) cursorDot.style.display = 'none';
+  }
+
+  // ====================================
+  // INIT PAGE ANIMATIONS
+  // ====================================
+  function initPageAnimations() {
     
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+    // Animate logo with anime.js
+    if (typeof anime !== 'undefined') {
+      anime({
+        targets: '.aura-logo',
+        scale: [0, 1],
+        rotate: [-180, 0],
+        opacity: [0, 1],
+        duration: 1200,
+        easing: 'easeOutElastic(1, .8)'
+      });
+
+      anime({
+        targets: '.aura-text',
+        translateX: [-50, 0],
+        opacity: [0, 1],
+        duration: 800,
+        delay: 300,
+        easing: 'easeOutQuad'
+      });
+
+      // Animate nav items
+      anime({
+        targets: '.nav-item',
+        translateY: [-20, 0],
+        opacity: [0, 1],
+        duration: 600,
+        delay: anime.stagger(100, {start: 400}),
+        easing: 'easeOutQuad'
+      });
+    }
+
+    // Hero section animations
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+      gsap.from('.hero-section h1', {
+        opacity: 0,
+        y: 80,
+        scale: 0.9,
+        duration: 1.2,
+        delay: 0.2,
+        ease: 'power3.out'
+      });
+
+      gsap.from('.hero-section .lead', {
+        opacity: 0,
+        y: 60,
+        duration: 1,
+        delay: 0.5,
+        ease: 'power3.out'
+      });
+
+      gsap.from('.hero-section .btn', {
+        opacity: 0,
+        y: 40,
+        scale: 0.9,
+        duration: 0.8,
+        delay: 0.8,
+        stagger: 0.2,
+        ease: 'back.out(1.7)'
+      });
+    }
+
+    // Service cards with anime.js
+    if (typeof anime !== 'undefined') {
+      anime({
+        targets: '.service-card',
+        translateY: [100, 0],
+        opacity: [0, 1],
+        scale: [0.8, 1],
+        rotate: [5, 0],
+        duration: 1000,
+        delay: anime.stagger(200, {start: 600}),
+        easing: 'easeOutElastic(1, .8)'
+      });
+
+      // Add 3D hover effect to service cards
+      document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          anime({
+            targets: card,
+            scale: 1.05,
+            rotateY: 5,
+            rotateX: -5,
+            duration: 400,
+            easing: 'easeOutQuad'
+          });
+        });
+
+        card.addEventListener('mouseleave', () => {
+          anime({
+            targets: card,
+            scale: 1,
+            rotateY: 0,
+            rotateX: 0,
+            duration: 400,
+            easing: 'easeOutQuad'
+          });
+        });
+      });
+
+      // Feature boxes
+      anime({
+        targets: '.feature-box',
+        translateY: [60, 0],
+        opacity: [0, 1],
+        duration: 800,
+        delay: anime.stagger(100, {start: 800}),
+        easing: 'easeOutQuad'
+      });
+
+      // Badges animation
+      anime({
+        targets: '.badge',
+        scale: [0, 1],
+        opacity: [0, 1],
+        duration: 600,
+        delay: anime.stagger(50),
+        easing: 'easeOutElastic(1, .6)'
+      });
+
+      // Stats counter with anime.js
+      document.querySelectorAll('.stat-number').forEach(stat => {
+        const text = stat.textContent;
+        const hasPlus = text.includes('+');
+        const hasPercent = text.includes('%');
+        const hasSlash = text.includes('/');
+        const number = parseInt(text.replace(/\D/g, ''));
+
+        if (!isNaN(number)) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                anime({
+                  targets: { value: 0 },
+                  value: number,
+                  duration: 2000,
+                  round: 1,
+                  easing: 'easeOutExpo',
+                  update: function(anim) {
+                    let val = Math.ceil(anim.animations[0].currentValue);
+                    if (hasPlus) val += '+';
+                    if (hasPercent) val += '%';
+                    if (hasSlash) val += '/7';
+                    stat.textContent = val;
+                  }
                 });
-            }
-        });
-    });
-});
-
-// Initialize animations
-function initAnimations() {
-    // Add loading animation to cards
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        card.classList.add('animate-slide-up');
-    });
-    
-    // Add fade-in animation to hero elements
-    const heroElements = document.querySelectorAll('.hero-section .animate-fade-in, .hero-section .animate-fade-in-delay');
-    heroElements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(30px)';
-        
-        setTimeout(() => {
-            element.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-        }, 100);
-    });
-}
-
-// Initialize scroll effects
-function initScrollEffects() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observe all scroll-animate elements
-    document.querySelectorAll('.scroll-animate').forEach(el => {
-        observer.observe(el);
-    });
-    
-    // Parallax effect for hero section
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero-section');
-        if (hero) {
-            const rate = scrolled * -0.5;
-            hero.style.transform = `translateY(${rate}px)`;
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.5 });
+          
+          observer.observe(stat);
         }
-    });
-}
+      });
+    }
 
-// Initialize hover effects
-function initHoverEffects() {
-    // Card hover effects
-    const eventCards = document.querySelectorAll('.event-card');
-    eventCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-10px) scale(1.02)';
-            this.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
-            this.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
-        });
-    });
-    
-    // Service feature hover effects
-    const serviceFeatures = document.querySelectorAll('.service-feature');
-    serviceFeatures.forEach(feature => {
-        feature.addEventListener('mouseenter', function() {
-            this.style.background = 'rgba(102, 126, 234, 0.1)';
-            this.style.transform = 'translateX(5px)';
-        });
-        
-        feature.addEventListener('mouseleave', function() {
-            this.style.background = 'transparent';
-            this.style.transform = 'translateX(0)';
-        });
-    });
-}
-
-// Initialize navbar effects
-function initNavbarEffects() {
+    // GSAP ScrollTrigger animations
     const navbar = document.querySelector('.navbar');
-    let lastScrollTop = 0;
-    
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Add/remove scrolled class for background change
-        if (scrollTop > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-        
-        // Hide/show navbar on scroll
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            navbar.style.transform = 'translateY(0)';
-        }
-        
-        lastScrollTop = scrollTop;
+    if (navbar) {
+      ScrollTrigger.create({
+        start: 'top -50',
+        end: 99999,
+        toggleClass: { className: 'scrolled', targets: '.navbar' }
+      });
+    }
+
+    gsap.utils.toArray('.section-title').forEach((title) => {
+      gsap.from(title, {
+        scrollTrigger: {
+          trigger: title,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 50,
+        scale: 0.9,
+        duration: 0.8,
+        ease: 'power3.out'
+      });
     });
 
-    // Remove custom hover show/hide for dropdowns to avoid conflicts with Bootstrap
-    // Dropdowns will use Bootstrap's click/tap behavior via data-bs-toggle="dropdown"
-}
+    gsap.utils.toArray('.section-subtitle').forEach((subtitle) => {
+      gsap.from(subtitle, {
+        scrollTrigger: {
+          trigger: subtitle,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        delay: 0.2,
+        ease: 'power3.out'
+      });
+    });
 
-// Button click effects
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('btn')) {
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        const rect = e.target.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.classList.add('ripple');
-        
-        e.target.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
+    // Partner cards
+    const partnerCards = document.querySelectorAll('.partner-card');
+    partnerCards.forEach((card, index) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        x: index % 2 === 0 ? -100 : 100,
+        rotation: index % 2 === 0 ? -10 : 10,
+        duration: 1,
+        ease: 'power3.out'
+      });
+    });
+
+    // CTA section
+    const ctaSection = document.querySelector('.cta-section');
+    if (ctaSection) {
+      gsap.from('.cta-section h2', {
+        scrollTrigger: {
+          trigger: '.cta-section',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        scale: 0.9,
+        y: 50,
+        duration: 1,
+        ease: 'back.out(1.7)'
+      });
+
+      gsap.from('.cta-section .lead', {
+        scrollTrigger: {
+          trigger: '.cta-section',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        delay: 0.3,
+        ease: 'power3.out'
+      });
+
+      gsap.from('.cta-section .btn', {
+        scrollTrigger: {
+          trigger: '.cta-section',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 30,
+        scale: 0.9,
+        duration: 0.8,
+        delay: 0.5,
+        stagger: 0.15,
+        ease: 'back.out(1.7)'
+      });
     }
-});
 
-// Add CSS for ripple effect
-const rippleCSS = `
-.ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.6);
-    transform: scale(0);
-    animation: ripple-animation 0.6s linear;
-    pointer-events: none;
-}
-
-@keyframes ripple-animation {
-    to {
-        transform: scale(4);
-        opacity: 0;
+    // Stats section
+    const statSection = document.querySelector('.stats-section');
+    if (statSection) {
+      gsap.from('.stat-item', {
+        scrollTrigger: {
+          trigger: '.stats-section',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 50,
+        scale: 0.8,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power3.out'
+      });
     }
-}
 
-.btn {
-    position: relative;
-    overflow: hidden;
-}
-`;
-
-// Inject ripple CSS
-const style = document.createElement('style');
-style.textContent = rippleCSS;
-document.head.appendChild(style);
-
-// Lazy loading for images (if any are added later)
-function initLazyLoading() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
+    // Button hover effects with anime.js
+    if (typeof anime !== 'undefined') {
+      document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+          anime({
+            targets: btn,
+            scale: 1.05,
+            duration: 300,
+            easing: 'easeOutQuad'
+          });
         });
+
+        btn.addEventListener('mouseleave', () => {
+          anime({
+            targets: btn,
+            scale: 1,
+            duration: 300,
+            easing: 'easeOutQuad'
+          });
+        });
+      });
+    }
+
+    // Social links hover
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        gsap.to(link, {
+          y: -5,
+          scale: 1.2,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      link.addEventListener('mouseleave', () => {
+        gsap.to(link, {
+          y: 0,
+          scale: 1,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
     });
-    
-    images.forEach(img => imageObserver.observe(img));
-}
 
-// Performance optimization
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
+    // Footer links
+    const footerLinks = document.querySelectorAll('.footer-link');
+    footerLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        gsap.to(link, {
+          x: 5,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
 
-// Optimized scroll handler
-const optimizedScrollHandler = debounce(() => {
-    // Handle scroll-based animations
-}, 16);
+      link.addEventListener('mouseleave', () => {
+        gsap.to(link, {
+          x: 0,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+    });
 
-window.addEventListener('scroll', optimizedScrollHandler);
+    // Smooth scroll for anchor links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            lenis.scrollTo(target, {
+              offset: -80,
+              duration: 1.5
+            });
+          }
+        }
+      });
+    });
 
-// Add loading states
-function showLoading(element) {
-    element.classList.add('loading');
-    element.innerHTML = '<div class="spinner"></div>';
-}
+    // Images fade in
+    gsap.utils.toArray('img').forEach(img => {
+      gsap.from(img, {
+        scrollTrigger: {
+          trigger: img,
+          start: 'top 85%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        scale: 0.8,
+        duration: 1,
+        ease: 'power3.out'
+      });
+    });
 
-function hideLoading(element, content) {
-    element.classList.remove('loading');
-    element.innerHTML = content;
-}
+    // Feature icons with magnetic effect
+    document.querySelectorAll('.feature-icon').forEach(icon => {
+      icon.addEventListener('mouseenter', () => {
+        gsap.to(icon, {
+          scale: 1.15,
+          rotate: 10,
+          duration: 0.4,
+          ease: 'elastic.out(1, 0.3)'
+        });
+      });
 
-// Add CSS for spinner
-const spinnerCSS = `
-.spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #667eea;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto;
-}
+      icon.addEventListener('mouseleave', () => {
+        gsap.to(icon, {
+          scale: 1,
+          rotate: 0,
+          duration: 0.4,
+          ease: 'elastic.out(1, 0.3)'
+        });
+      });
+    });
+  }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.loading {
-    opacity: 0.7;
-    pointer-events: none;
-}
-`;
-
-const spinnerStyle = document.createElement('style');
-spinnerStyle.textContent = spinnerCSS;
-document.head.appendChild(spinnerStyle);
+  console.log('✨ Aura - Enhanced animations initialized with anime.js, GSAP & Three.js');
+});

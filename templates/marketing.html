@@ -2,381 +2,235 @@
 {% block title %}Digital Marketing - Aura{% endblock %}
 
 {% block content %}
-<!-- Hero Section with Particle Background -->
-<section class="hero-section position-relative overflow-hidden">
-  <div class="particle-background">
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
+<!-- Hero Section with 3D Spline Background -->
+<section class="marketing-hero position-relative overflow-hidden">
+  <div class="spline-3d-container">
+    <iframe 
+      src='https://my.spline.design/untitled-a83ab26af3ee9e18cded61fe29e47c84/' 
+      frameborder='0' 
+      width='100%' 
+      height='100%' 
+      style="position: absolute; top: 0; left: 0; opacity: 0.4;"
+      id="marketing-spline">
+    </iframe>
   </div>
-  <div class="container text-center position-relative">
+  
+  <div class="floating-3d-elements">
+    <div class="floating-element element-1"></div>
+    <div class="floating-element element-2"></div>
+    <div class="floating-element element-3"></div>
+    <div class="floating-element element-4"></div>
+  </div>
+  
+  <div class="container text-center position-relative hero-content">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <h1 class="display-3 fw-bold mb-4 fade-in">
-          <span class="text-warning">Digital Marketing</span>
+      <div class="col-lg-10">
+        <h1 class="hero-title" data-aos="fade-up" data-aos-duration="1000">
+          <span class="text-gradient-3d">Digital Marketing</span>
+          <br>
+          <span class="hero-subtitle">That Transcends Boundaries</span>
         </h1>
-        <p class="lead mb-4 fade-in">We don't just market – we create <strong>digital movements</strong> that make your brand impossible to ignore and your competitors impossible to catch up with.</p>
-        <div class="marketing-stats mb-4">
-          <div class="row text-center">
-            <div class="col-4">
-              <div class="stat-item">
-                <div class="stat-number" data-target="150">0</div>
-                <div class="stat-label">Campaigns</div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="stat-item">
-                <div class="stat-number" data-target="250">0</div>
-                <div class="stat-label">% ROI Average</div>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="stat-item">
-                <div class="stat-number" data-target="1">0</div>
-                <div class="stat-label">Million Impressions</div>
-              </div>
-            </div>
+        <p class="lead hero-description" data-aos="fade-up" data-aos-delay="200">
+          We don't just market – we create <strong>digital ecosystems</strong> that transform visitors into loyal advocates and brands into legends.
+        </p>
+        
+        <!-- Enhanced Stats -->
+        <div class="marketing-stats-3d" data-aos="fade-up" data-aos-delay="400">
+          <div class="stat-card-3d" data-value="150">
+            <div class="stat-number-main">150+</div>
+            <div class="stat-label-main">Successful Campaigns</div>
           </div>
-        </div>
-        <a href="{{ url_for('main.contact') }}" class="btn btn-primary btn-lg fade-in pulse-animation">
-          <i class="fas fa-rocket me-2"></i>Launch Your Campaign
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Interactive Marketing Services -->
-<section class="py-5">
-  <div class="container">
-    <div class="row text-center mb-5">
-      <div class="col-lg-8 mx-auto">
-        <h2 class="section-title text-gradient">Marketing Services That Convert</h2>
-        <p class="section-subtitle">Choose your marketing superpower</p>
-      </div>
-    </div>
-    
-    <div class="row g-4">
-      <div class="col-lg-6 col-md-6">
-        <div class="marketing-service-card h-100" data-service="social">
-          <div class="service-icon">
-            <i class="fas fa-share-alt fa-3x text-primary"></i>
+          <div class="stat-card-3d" data-value="250">
+            <div class="stat-number-main">250%</div>
+            <div class="stat-label-main">Average ROI</div>
           </div>
-          <div class="service-content">
-            <h4>Social Media Marketing</h4>
-            <p>Dominate social platforms with content that goes viral and builds communities around your brand.</p>
-            <div class="service-features">
-              <span class="feature-tag">Content Creation</span>
-              <span class="feature-tag">Community Management</span>
-              <span class="feature-tag">Influencer Partnerships</span>
-              <span class="feature-tag">Viral Campaigns</span>
-            </div>
-            <div class="platform-icons">
-              <i class="fab fa-facebook text-primary"></i>
-              <i class="fab fa-instagram text-danger"></i>
-              <i class="fab fa-twitter text-info"></i>
-              <i class="fab fa-linkedin text-primary"></i>
-              <i class="fab fa-tiktok text-dark"></i>
-            </div>
+          <div class="stat-card-3d" data-value="1000000">
+            <div class="stat-number-main">1M+</div>
+            <div class="stat-label-main">Impressions Daily</div>
           </div>
-        </div>
-      </div>
-      
-      <div class="col-lg-6 col-md-6">
-        <div class="marketing-service-card h-100" data-service="ppc">
-          <div class="service-icon">
-            <i class="fas fa-ad fa-3x text-success"></i>
-          </div>
-          <div class="service-content">
-            <h4>PPC & Advertising</h4>
-            <p>Targeted ads that reach your perfect audience and drive conversions with laser precision.</p>
-            <div class="service-features">
-              <span class="feature-tag">Google Ads</span>
-              <span class="feature-tag">Facebook Ads</span>
-              <span class="feature-tag">Remarketing</span>
-              <span class="feature-tag">Conversion Optimization</span>
-            </div>
-            <div class="platform-icons">
-              <i class="fab fa-google text-success"></i>
-              <i class="fab fa-facebook text-primary"></i>
-              <i class="fab fa-instagram text-danger"></i>
-              <i class="fab fa-linkedin text-primary"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-lg-6 col-md-6">
-        <div class="marketing-service-card h-100" data-service="seo">
-          <div class="service-icon">
-            <i class="fas fa-search fa-3x text-warning"></i>
-          </div>
-          <div class="service-content">
-            <h4>SEO & Content Marketing</h4>
-            <p>Dominate search results with content that ranks, converts, and establishes your authority.</p>
-            <div class="service-features">
-              <span class="feature-tag">Keyword Research</span>
-              <span class="feature-tag">Content Strategy</span>
-              <span class="feature-tag">Technical SEO</span>
-              <span class="feature-tag">Link Building</span>
-            </div>
-            <div class="platform-icons">
-              <i class="fab fa-google text-success"></i>
-              <i class="fas fa-chart-line text-warning"></i>
-              <i class="fas fa-link text-info"></i>
-              <i class="fas fa-pen-fancy text-primary"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-lg-6 col-md-6">
-        <div class="marketing-service-card h-100" data-service="email">
-          <div class="service-icon">
-            <i class="fas fa-envelope fa-3x text-info"></i>
-          </div>
-          <div class="service-content">
-            <h4>Email Marketing</h4>
-            <p>Build relationships and drive sales with email campaigns that your subscribers actually want to read.</p>
-            <div class="service-features">
-              <span class="feature-tag">Automation</span>
-              <span class="feature-tag">Segmentation</span>
-              <span class="feature-tag">A/B Testing</span>
-              <span class="feature-tag">Personalization</span>
-            </div>
-            <div class="platform-icons">
-              <i class="fas fa-envelope text-info"></i>
-              <i class="fas fa-robot text-success"></i>
-              <i class="fas fa-chart-bar text-warning"></i>
-              <i class="fas fa-users text-primary"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Marketing Process with Animated Steps -->
-<section class="py-5 bg-light">
-  <div class="container">
-    <div class="row text-center mb-5">
-      <div class="col-lg-8 mx-auto">
-        <h2 class="section-title text-gradient">Our Marketing Process</h2>
-        <p class="section-subtitle">The proven 5-step process that delivers results</p>
-      </div>
-    </div>
-    
-    <div class="marketing-process">
-      <div class="process-step" data-step="1">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h5><i class="fas fa-search me-2 text-primary"></i>Research & Analysis</h5>
-          <p>Deep dive into your market, competitors, and audience to create a winning strategy.</p>
-          <div class="step-duration">Week 1-2</div>
-        </div>
-      </div>
-      
-      <div class="process-step" data-step="2">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h5><i class="fas fa-lightbulb me-2 text-warning"></i>Strategy & Planning</h5>
-          <p>Develop comprehensive marketing strategies tailored to your business goals and budget.</p>
-          <div class="step-duration">Week 3</div>
-        </div>
-      </div>
-      
-      <div class="process-step" data-step="3">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h5><i class="fas fa-paint-brush me-2 text-success"></i>Creative Development</h5>
-          <p>Create compelling content, ads, and campaigns that capture attention and drive action.</p>
-          <div class="step-duration">Week 4-5</div>
-        </div>
-      </div>
-      
-      <div class="process-step" data-step="4">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h5><i class="fas fa-rocket me-2 text-danger"></i>Launch & Optimize</h5>
-          <p>Execute campaigns across all channels and continuously optimize for maximum performance.</p>
-          <div class="step-duration">Week 6-8</div>
-        </div>
-      </div>
-      
-      <div class="process-step" data-step="5">
-        <div class="step-number">5</div>
-        <div class="step-content">
-          <h5><i class="fas fa-chart-line me-2 text-info"></i>Monitor & Scale</h5>
-          <p>Track results, analyze data, and scale successful campaigns for exponential growth.</p>
-          <div class="step-duration">Ongoing</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Results Showcase -->
-<section class="py-5">
-  <div class="container">
-    <div class="row text-center mb-5">
-      <div class="col-lg-8 mx-auto">
-        <h2 class="section-title text-gradient">Results That Speak</h2>
-        <p class="section-subtitle">Real results from real campaigns</p>
-      </div>
-    </div>
-    
-    <div class="results-showcase">
-      <div class="row g-4">
-        <div class="col-lg-3 col-md-6">
-          <div class="result-card text-center">
-            <div class="result-icon">
-              <i class="fas fa-chart-line fa-3x text-success"></i>
-            </div>
-            <div class="result-number" data-target="250">0</div>
-            <div class="result-label">% Average ROI</div>
-            <div class="result-description">Across all marketing campaigns</div>
+          <div class="stat-card-3d" data-value="98">
+            <div class="stat-number-main">98%</div>
+            <div class="stat-label-main">Client Satisfaction</div>
           </div>
         </div>
         
-        <div class="col-lg-3 col-md-6">
-          <div class="result-card text-center">
-            <div class="result-icon">
-              <i class="fas fa-users fa-3x text-primary"></i>
-            </div>
-            <div class="result-number" data-target="25">0</div>
-            <div class="result-label">K New Customers</div>
-            <div class="result-description">Generated through our campaigns</div>
-          </div>
+        <div class="hero-cta" data-aos="fade-up" data-aos-delay="600">
+          <a href="{{ url_for('main.contact') }}" class="btn-3d btn-launch">
+            <span class="btn-content">
+              <i class="fas fa-rocket"></i>
+              <span>Launch Campaign</span>
+            </span>
+            <div class="btn-shine"></div>
+          </a>
         </div>
-        
-        <div class="col-lg-3 col-md-6">
-          <div class="result-card text-center">
-            <div class="result-icon">
-              <i class="fas fa-globe fa-3x text-warning"></i>
-            </div>
-            <div class="result-number" data-target="1">0</div>
-            <div class="result-label">Million Impressions</div>
-            <div class="result-description">Reached across all platforms</div>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6">
-          <div class="result-card text-center">
-            <div class="result-icon">
-              <i class="fas fa-trophy fa-3x text-danger"></i>
-            </div>
-            <div class="result-number" data-target="95">0</div>
-            <div class="result-label">% Client Retention</div>
-            <div class="result-description">Long-term partnerships</div>
-          </div>
-        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator" data-aos="fade-up" data-aos-delay="800">
+    <div class="mouse-scroll">
+      <div class="mouse">
+        <div class="wheel"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Marketing Tools & Platforms -->
-<section class="py-5 bg-light">
+
+
+<!-- Advanced Marketing Process with GSAP Animations -->
+<section class="process-section-3d py-5 position-relative">
   <div class="container">
-    <div class="row text-center mb-5">
-      <div class="col-lg-8 mx-auto">
-        <h2 class="section-title text-gradient">Tools & Platforms We Master</h2>
-        <p class="section-subtitle">We're certified experts in the industry's leading marketing tools</p>
-      </div>
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="section-title-3d">
+        <span class="title-line">Our Proven Process</span>
+      </h2>
+      <p class="section-subtitle-3d">5-Step methodology that guarantees results</p>
     </div>
     
-    <div class="tools-showcase">
-      <div class="tool-category">
-        <h6 class="text-primary mb-3">Analytics & Tracking</h6>
-        <div class="tools-grid">
-          <div class="tool-item" data-tool="Google Analytics">
-            <i class="fab fa-google fa-2x text-success"></i>
-            <span>Google Analytics</span>
+    <div class="process-timeline-3d">
+      <div class="process-line"></div>
+      
+      <div class="process-item" data-aos="fade-right" data-aos-delay="100">
+        <div class="process-number-3d">01</div>
+        <div class="process-content-3d">
+          <div class="process-icon-3d">
+            <i class="fas fa-search-location fa-2x"></i>
           </div>
-          <div class="tool-item" data-tool="Facebook Pixel">
-            <i class="fab fa-facebook fa-2x text-primary"></i>
-            <span>Facebook Pixel</span>
-          </div>
-          <div class="tool-item" data-tool="Hotjar">
-            <i class="fas fa-fire fa-2x text-warning"></i>
-            <span>Hotjar</span>
-          </div>
-          <div class="tool-item" data-tool="SEMrush">
-            <i class="fas fa-search fa-2x text-info"></i>
-            <span>SEMrush</span>
-          </div>
+          <h4>Research & Discovery</h4>
+          <p>Deep market analysis and competitor research to identify opportunities</p>
+          <div class="process-duration">Week 1-2</div>
         </div>
       </div>
       
-      <div class="tool-category">
-        <h6 class="text-success mb-3">Advertising Platforms</h6>
-        <div class="tools-grid">
-          <div class="tool-item" data-tool="Google Ads">
-            <i class="fab fa-google fa-2x text-success"></i>
-            <span>Google Ads</span>
+      <div class="process-item" data-aos="fade-left" data-aos-delay="200">
+        <div class="process-number-3d">02</div>
+        <div class="process-content-3d">
+          <div class="process-icon-3d">
+            <i class="fas fa-lightbulb fa-2x"></i>
           </div>
-          <div class="tool-item" data-tool="Facebook Ads">
-            <i class="fab fa-facebook fa-2x text-primary"></i>
-            <span>Facebook Ads</span>
-          </div>
-          <div class="tool-item" data-tool="LinkedIn Ads">
-            <i class="fab fa-linkedin fa-2x text-primary"></i>
-            <span>LinkedIn Ads</span>
-          </div>
-          <div class="tool-item" data-tool="TikTok Ads">
-            <i class="fab fa-tiktok fa-2x text-dark"></i>
-            <span>TikTok Ads</span>
-          </div>
+          <h4>Strategy Development</h4>
+          <p>Custom marketing strategies tailored to your business goals</p>
+          <div class="process-duration">Week 3</div>
         </div>
       </div>
       
-      <div class="tool-category">
-        <h6 class="text-warning mb-3">Marketing Automation</h6>
-        <div class="tools-grid">
-          <div class="tool-item" data-tool="Mailchimp">
-            <i class="fas fa-envelope fa-2x text-orange"></i>
-            <span>Mailchimp</span>
+      <div class="process-item" data-aos="fade-right" data-aos-delay="300">
+        <div class="process-number-3d">03</div>
+        <div class="process-content-3d">
+          <div class="process-icon-3d">
+            <i class="fas fa-paint-brush fa-2x"></i>
           </div>
-          <div class="tool-item" data-tool="HubSpot">
-            <i class="fas fa-hubspot fa-2x text-orange"></i>
-            <span>HubSpot</span>
+          <h4>Creative Execution</h4>
+          <p>High-impact creative content that captures attention and drives action</p>
+          <div class="process-duration">Week 4-5</div>
+        </div>
+      </div>
+      
+      <div class="process-item" data-aos="fade-left" data-aos-delay="400">
+        <div class="process-number-3d">04</div>
+        <div class="process-content-3d">
+          <div class="process-icon-3d">
+            <i class="fas fa-rocket fa-2x"></i>
           </div>
-          <div class="tool-item" data-tool="Zapier">
-            <i class="fas fa-bolt fa-2x text-warning"></i>
-            <span>Zapier</span>
+          <h4>Launch & Optimize</h4>
+          <p>Multi-channel campaign deployment with real-time optimization</p>
+          <div class="process-duration">Week 6-8</div>
+        </div>
+      </div>
+      
+      <div class="process-item" data-aos="fade-right" data-aos-delay="500">
+        <div class="process-number-3d">05</div>
+        <div class="process-content-3d">
+          <div class="process-icon-3d">
+            <i class="fas fa-chart-line fa-2x"></i>
           </div>
-          <div class="tool-item" data-tool="ConvertKit">
-            <i class="fas fa-paper-plane fa-2x text-success"></i>
-            <span>ConvertKit</span>
-          </div>
+          <h4>Scale & Amplify</h4>
+          <p>Continuous monitoring and scaling of successful campaigns</p>
+          <div class="process-duration">Ongoing</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA Section with Animated Background -->
-<section class="py-5 bg-primary text-white position-relative overflow-hidden">
-  <div class="animated-marketing-bg">
-    <div class="marketing-element me-1"></div>
-    <div class="marketing-element me-2"></div>
-    <div class="marketing-element me-3"></div>
+<!-- Results Showcase with 3D Counters -->
+<section class="results-3d-section py-5 position-relative">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="section-title-3d">
+        <span class="title-line">Results That Matter</span>
+      </h2>
+    </div>
+    
+    <div class="row g-4 results-grid-3d">
+      <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+        <div class="result-box-3d">
+          <div class="result-icon-3d result-icon-1">
+            <i class="fas fa-chart-line fa-3x"></i>
+          </div>
+          <div class="result-number-3d" data-target="250">0</div>
+          <div class="result-suffix">%</div>
+          <div class="result-label-3d">Average ROI</div>
+          <div class="result-description-3d">Across all campaigns</div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+        <div class="result-box-3d">
+          <div class="result-icon-3d result-icon-2">
+            <i class="fas fa-users fa-3x"></i>
+          </div>
+          <div class="result-number-3d" data-target="25">0</div>
+          <div class="result-suffix">K+</div>
+          <div class="result-label-3d">New Customers</div>
+          <div class="result-description-3d">Generated annually</div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+        <div class="result-box-3d">
+          <div class="result-icon-3d result-icon-3">
+            <i class="fas fa-globe fa-3x"></i>
+          </div>
+          <div class="result-number-3d" data-target="1">0</div>
+          <div class="result-suffix">M+</div>
+          <div class="result-label-3d">Impressions</div>
+          <div class="result-description-3d">Monthly reach</div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+        <div class="result-box-3d">
+          <div class="result-icon-3d result-icon-4">
+            <i class="fas fa-trophy fa-3x"></i>
+          </div>
+          <div class="result-number-3d" data-target="95">0</div>
+          <div class="result-suffix">%</div>
+          <div class="result-label-3d">Client Retention</div>
+          <div class="result-description-3d">Long-term partners</div>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
+
+<!-- CTA Section with 3D Effect -->
+<section class="cta-3d-section py-5 position-relative overflow-hidden">
+  <div class="cta-bg-3d"></div>
   <div class="container text-center position-relative">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <h2 class="mb-4">Ready to Dominate Your Market?</h2>
-        <p class="lead mb-4">Let's create marketing campaigns that don't just reach your audience – they create movements around your brand.</p>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-          <a href="{{ url_for('main.contact') }}" class="btn btn-light btn-lg pulse-animation">
-            <i class="fas fa-paper-plane me-2"></i>Start Your Campaign
+      <div class="col-lg-8" data-aos="zoom-in">
+        <h2 class="cta-title-3d">Ready to Transform Your Marketing?</h2>
+        <p class="cta-description-3d">Let's create campaigns that don't just reach your audience – they create movements around your brand.</p>
+        <div class="cta-buttons-3d">
+          <a href="{{ url_for('main.contact') }}" class="btn-3d btn-primary-3d">
+            <span>Start Your Campaign</span>
+            <i class="fas fa-arrow-right"></i>
           </a>
-          <a href="{{ url_for('main.webdev') }}" class="btn btn-outline-light btn-lg">
-            <i class="fas fa-code me-2"></i>Web Development
+          <a href="{{ url_for('main.webdev') }}" class="btn-3d btn-outline-3d">
+            <span>View Our Work</span>
           </a>
         </div>
       </div>
@@ -384,7 +238,7 @@
   </div>
 </section>
 
-<!-- Custom CSS for Marketing Page -->
+<!-- Advanced CSS Styles -->
 <style>
 .particle-background {
   position: absolute;
@@ -759,57 +613,1070 @@
   0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
   50% { transform: translateY(-40px) rotate(180deg) scale(1.2); }
 }
-</style>
 
-<!-- JavaScript for Marketing Page -->
-<script>
-// Animated Counter for Results
-function animateCounter(element, target) {
-  let current = 0;
-  const isText = element.textContent.includes('K') || element.textContent.includes('M');
-  
-  if (isText) {
-    // Handle text-based targets (K, M)
-    const targetValue = target;
-    element.textContent = targetValue;
-    return;
-  }
-  
-  const increment = target / 100;
-  const timer = setInterval(() => {
-    current += increment;
-    if (current >= target) {
-      current = target;
-      clearInterval(timer);
-    }
-    element.textContent = Math.floor(current);
-  }, 20);
+/* New styles for 3D elements */
+.spline-3d-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure it's behind other content */
 }
 
-// Initialize counters when page loads
+.floating-3d-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Ensure it's above the spline */
+  pointer-events: none; /* Allow clicks to pass through to spline */
+}
+
+.floating-element {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  opacity: 0.5;
+  filter: blur(5px);
+  animation: float-in-out 15s ease-in-out infinite;
+}
+
+.element-1 {
+  width: 150px;
+  height: 150px;
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.element-2 {
+  width: 100px;
+  height: 100px;
+  top: 70%;
+  right: 20%;
+  animation-delay: 5s;
+}
+
+.element-3 {
+  width: 120px;
+  height: 120px;
+  bottom: 10%;
+  left: 50%;
+  animation-delay: 10s;
+}
+
+.element-4 {
+  width: 80px;
+  height: 80px;
+  top: 40%;
+  left: 70%;
+  animation-delay: 15s;
+}
+
+@keyframes float-in-out {
+  0% { transform: translateY(0) scale(1); opacity: 0.5; }
+  25% { transform: translateY(-20px) scale(1.1); opacity: 0.7; }
+  50% { transform: translateY(0) scale(1); opacity: 0.5; }
+  75% { transform: translateY(20px) scale(1.1); opacity: 0.7; }
+  100% { transform: translateY(0) scale(1); opacity: 0.5; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2; /* Ensure content is above spline */
+  padding-top: 150px; /* Adjust for spline height */
+  padding-bottom: 100px;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 1.8rem;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.marketing-stats-3d {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.stat-card-3d {
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card-3d:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number-main {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.stat-label-main {
+  font-size: 1rem;
+  opacity: 0.8;
+  color: #ccc;
+}
+
+.btn-3d {
+  position: relative;
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.btn-3d:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-3d:active {
+  transform: translateY(1px);
+}
+
+.btn-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+  z-index: -1;
+}
+
+.btn-3d:hover .btn-shine {
+  left: 100%;
+}
+
+.btn-launch {
+  background: linear-gradient(45deg, #4CAF50, #45a049); /* Darker green for launch */
+}
+
+.btn-launch:hover {
+  background: linear-gradient(45deg, #388E3C, #357A38);
+}
+
+.btn-primary-3d {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+.btn-primary-3d:hover {
+  background: linear-gradient(45deg, #388E3C, #357A38);
+}
+
+.btn-outline-3d {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.btn-outline-3d:hover {
+  background: #fff;
+  color: #333;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  opacity: 0.7;
+}
+
+.mouse-scroll {
+  width: 40px;
+  height: 70px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mouse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  animation: mouse-scroll 1.5s infinite;
+}
+
+.wheel {
+  width: 2px;
+  height: 5px;
+  background: #fff;
+  border-radius: 2px;
+  animation: wheel-spin 1s infinite linear;
+}
+
+@keyframes mouse-scroll {
+  0% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(10px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.5; }
+}
+
+@keyframes wheel-spin {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
+}
+
+/* New styles for 3D overview section */
+.overview-3d-section {
+  background: #f8f9fa; /* Light background for overview */
+  position: relative;
+  overflow: hidden;
+}
+
+.overview-bg-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.bg-circle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  filter: blur(5px);
+  opacity: 0.5;
+  animation: bg-circle-float 15s ease-in-out infinite;
+}
+
+.circle-1 {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 150px;
+  height: 150px;
+  top: 70%;
+  right: 20%;
+  animation-delay: 5s;
+}
+
+.circle-3 {
+  width: 250px;
+  height: 250px;
+  bottom: 10%;
+  left: 50%;
+  animation-delay: 10s;
+}
+
+@keyframes bg-circle-float {
+  0% { transform: translateY(0) scale(1); opacity: 0.5; }
+  25% { transform: translateY(-30px) scale(1.1); opacity: 0.7; }
+  50% { transform: translateY(0) scale(1); opacity: 0.5; }
+  75% { transform: translateY(30px) scale(1.1); opacity: 0.7; }
+  100% { transform: translateY(0) scale(1); opacity: 0.5; }
+}
+
+.service-cards-3d {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.service-card-advanced {
+  position: relative;
+  perspective: 1000px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+}
+
+.card-3d-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-front-3d {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: rotateY(0deg);
+}
+
+.card-back-3d {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transform: rotateY(180deg);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.service-card-advanced:hover .card-3d-inner {
+  transform: rotateY(180deg);
+}
+
+.service-card-advanced:hover .card-front-3d {
+  opacity: 0;
+}
+
+.service-card-advanced:hover .card-back-3d {
+  opacity: 1;
+}
+
+.service-icon-3d {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  background: #f0f0f0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.icon-bg-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.gradient-seo {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+.gradient-social {
+  background: linear-gradient(45deg, #2196F3, #1976D2);
+}
+.gradient-ppc {
+  background: linear-gradient(45deg, #FF9800, #F57C00);
+}
+.gradient-content {
+  background: linear-gradient(45deg, #9C27B0, #7B1FA2);
+}
+
+.service-title-3d {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.service-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.service-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.service-features-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.service-features-list li {
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+}
+
+.service-features-list li i {
+  margin-right: 10px;
+  color: #667eea;
+  font-size: 1rem;
+}
+
+.btn-explore {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-explore:hover {
+  background: linear-gradient(45deg, #764ba2, #667eea);
+}
+
+.btn-explore i {
+  transition: transform 0.3s ease;
+}
+
+.btn-explore:hover i {
+  transform: translateX(5px);
+}
+
+/* New styles for 3D process section */
+.process-section-3d {
+  background: #f8f9fa; /* Light background for process */
+  position: relative;
+  overflow: hidden;
+}
+
+.process-timeline-3d {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  padding: 20px;
+}
+
+.process-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 80%;
+  background: #e0e0e0;
+  z-index: -1;
+}
+
+.process-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.process-item:nth-child(even) {
+  flex-direction: row-reverse;
+  transform: translateX(50px);
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.process-number-3d {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 20px;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.process-content-3d {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  flex: 1;
+  transform: translateX(-20px); /* Initial position for animation */
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.process-item:nth-child(even) .process-content-3d {
+  transform: translateX(20px); /* Initial position for animation */
+}
+
+.process-item:hover .process-content-3d {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.process-icon-3d {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.process-icon-3d i {
+  font-size: 2.5rem;
+  color: #667eea;
+}
+
+.process-content-3d h4 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.process-content-3d p {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.process-duration {
+  display: inline-block;
+  background: #667eea;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* New styles for 3D results section */
+.results-3d-section {
+  background: #f8f9fa; /* Light background for results */
+  position: relative;
+  overflow: hidden;
+}
+
+.results-grid-3d {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.result-box-3d {
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-box-3d:hover {
+  transform: translateY(-10px);
+}
+
+.result-icon-3d {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.result-number-3d {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #667eea;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.result-suffix {
+  font-size: 0.8rem;
+  color: #666;
+  position: relative;
+  z-index: 1;
+}
+
+.result-label-3d {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.result-description-3d {
+  font-size: 0.9rem;
+  color: #666;
+  position: relative;
+  z-index: 1;
+}
+
+/* New styles for 3D CTA section */
+.cta-3d-section {
+  background: linear-gradient(135deg, #667eea, #764ba2); /* Darker gradient for CTA */
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-bg-3d {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://images.unsplash.com/photo-1517486803460-639689857c9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') center/cover;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+.cta-title-3d {
+  font-size: 3.5rem;
+  color: #fff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cta-description-3d {
+  font-size: 1.2rem;
+  color: #eee;
+  margin-bottom: 40px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.cta-buttons-3d {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.btn-3d.btn-primary-3d {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+.btn-3d.btn-primary-3d:hover {
+  background: linear-gradient(45deg, #388E3C, #357A38);
+}
+
+.btn-3d.btn-outline-3d {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
+
+.btn-3d.btn-outline-3d:hover {
+  background: #fff;
+  color: #333;
+}
+
+/* New styles for 3D section titles */
+.section-title-3d {
+  position: relative;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.section-title-3d::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+.section-subtitle-3d {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 40px;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.section-subtitle-3d::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #e0e0e0;
+  border-radius: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  .hero-subtitle {
+    font-size: 1.4rem;
+  }
+  .marketing-stats-3d {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+  .stat-number-main {
+    font-size: 2.8rem;
+  }
+  .stat-label-main {
+    font-size: 0.8rem;
+  }
+  .service-cards-3d {
+    grid-template-columns: 1fr;
+  }
+  .process-timeline-3d {
+    padding: 10px;
+  }
+  .process-line {
+    height: 70%;
+  }
+  .process-item {
+    margin-bottom: 30px;
+  }
+  .process-number-3d {
+    margin: 0 15px;
+  }
+  .process-content-3d {
+    padding: 20px;
+  }
+  .result-box-3d {
+    padding: 25px 15px;
+  }
+  .result-number-3d {
+    font-size: 2rem;
+  }
+  .cta-title-3d {
+    font-size: 2.8rem;
+  }
+  .cta-description-3d {
+    font-size: 1rem;
+  }
+  .cta-buttons-3d {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .section-title-3d {
+    font-size: 2.2rem;
+  }
+  .section-subtitle-3d {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    padding-top: 100px;
+    padding-bottom: 70px;
+  }
+  .hero-title {
+    font-size: 2.8rem;
+  }
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+  .marketing-stats-3d {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+  .stat-number-main {
+    font-size: 2.2rem;
+  }
+  .stat-label-main {
+    font-size: 0.7rem;
+  }
+  .floating-3d-elements {
+    display: none; /* Hide floating elements on smaller screens */
+  }
+  .spline-3d-container {
+    height: 300px; /* Adjust spline height for smaller screens */
+  }
+  .overview-bg-elements {
+    display: none; /* Hide background elements on smaller screens */
+  }
+  .process-timeline-3d {
+    padding: 5px;
+  }
+  .process-line {
+    height: 60%;
+  }
+  .process-item {
+    margin-bottom: 25px;
+  }
+  .process-number-3d {
+    margin: 0 10px;
+  }
+  .process-content-3d {
+    padding: 15px;
+  }
+  .result-box-3d {
+    padding: 20px 10px;
+  }
+  .result-number-3d {
+    font-size: 1.8rem;
+  }
+  .cta-title-3d {
+    font-size: 2.2rem;
+  }
+  .cta-description-3d {
+    font-size: 0.9rem;
+  }
+  .cta-buttons-3d {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .section-title-3d {
+    font-size: 1.8rem;
+  }
+  .section-subtitle-3d {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .marketing-stats-3d {
+    padding: 10px;
+  }
+  .stat-number-main {
+    font-size: 1.8rem;
+  }
+  .stat-label-main {
+    font-size: 0.6rem;
+  }
+  .service-cards-3d {
+    grid-template-columns: 1fr;
+  }
+  .process-timeline-3d {
+    padding: 0;
+  }
+  .process-line {
+    height: 50%;
+  }
+  .process-item {
+    margin-bottom: 20px;
+  }
+  .process-number-3d {
+    margin: 0 5px;
+  }
+  .process-content-3d {
+    padding: 10px;
+  }
+  .result-box-3d {
+    padding: 15px 5px;
+  }
+  .result-number-3d {
+    font-size: 1.5rem;
+  }
+  .cta-title-3d {
+    font-size: 1.8rem;
+  }
+  .cta-description-3d {
+    font-size: 0.8rem;
+  }
+  .cta-buttons-3d {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .section-title-3d {
+    font-size: 1.5rem;
+  }
+  .section-subtitle-3d {
+    font-size: 0.8rem;
+  }
+}
+</style>
+
+<!-- JavaScript for Advanced Marketing Page -->
+<script>
 document.addEventListener('DOMContentLoaded', function() {
-  const counters = document.querySelectorAll('.stat-number, .result-number');
-  counters.forEach(counter => {
-    const target = parseInt(counter.getAttribute('data-target'));
-    animateCounter(counter, target);
-  });
+  // Counter Animation
+  function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+    
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        element.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        element.textContent = target;
+      }
+    };
+    
+    updateCounter();
+  }
   
-  // Animate process steps on scroll
-  const observerOptions = {
-    threshold: 0.5,
-    rootMargin: '0px 0px -100px 0px'
-  };
-  
-  const observer = new IntersectionObserver((entries) => {
+  // Intersection Observer for Counters
+  const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.animationDelay = entry.target.dataset.step * 0.2 + 's';
+        const counter = entry.target;
+        if (!counter.classList.contains('counted')) {
+          counter.classList.add('counted');
+          animateCounter(counter);
+        }
       }
     });
-  }, observerOptions);
+  }, { threshold: 0.5 });
   
-  document.querySelectorAll('.process-step').forEach(step => {
-    observer.observe(step);
+  document.querySelectorAll('.result-number-3d, .stat-number-main').forEach(counter => {
+    counterObserver.observe(counter);
+  });
+  
+  // 3D Card Hover Effects
+  const serviceCards = document.querySelectorAll('.service-card-advanced');
+  serviceCards.forEach(card => {
+    const inner = card.querySelector('.card-3d-inner');
+    
+    card.addEventListener('mouseenter', () => {
+      inner.style.transform = 'rotateY(180deg) scale(1.05)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      inner.style.transform = 'rotateY(0deg) scale(1)';
+    });
+  });
+  
+  // Parallax Effect for Floating Elements
+  document.addEventListener('mousemove', (e) => {
+    const elements = document.querySelectorAll('.floating-element');
+    const mouseX = e.clientX / window.innerWidth;
+    const mouseY = e.clientY / window.innerHeight;
+    
+    elements.forEach((element, index) => {
+      const speed = (index + 1) * 0.1;
+      const x = (mouseX - 0.5) * 50 * speed;
+      const y = (mouseY - 0.5) * 50 * speed;
+      element.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  });
+  
+  // Smooth Scroll with Lenis
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smooth: true,
+  });
+  
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  
+  requestAnimationFrame(raf);
+  
+  // GSAP Scroll Animations
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Fade in animations
+  gsap.utils.toArray('[data-aos="fade-up"]').forEach(el => {
+    gsap.from(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
+      },
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    });
+  });
+  
+  // Process items animation
+  document.querySelectorAll('.process-item').forEach((item, index) => {
+    gsap.from(item, {
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 80%',
+        toggleActions: 'play none none reverse'
+      },
+      x: index % 2 === 0 ? -100 : 100,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power3.out'
+    });
   });
 });
 </script>

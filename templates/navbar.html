@@ -1,62 +1,53 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="/">
-      <img src="{{ url_for('static', filename='img/aura-logo.svg') }}" alt="Aura" height="40" class="me-2">
-      Aura
+    <a class="navbar-brand" href="/">
+      <img src="{{ url_for('static', filename='img/aura-logo.png') }}" alt="Aura" class="aura-logo me-2" onerror="this.style.display='none'">
+      <span class="aura-text">Aura</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
 
-        <!-- Home -->
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
         </li>
 
-        <!-- About -->
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('main.career') }}">Career</a>
-        </li>
-        
-        <!-- Digital Marketing (Prominent) -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-warning fw-bold" href="#" id="marketingDropdown" role="button"
+          <a class="nav-link dropdown-toggle" href="#" id="marketingDropdown" role="button"
              data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-chart-line me-1"></i>Digital Marketing
+            <i class="fas fa-chart-line me-1 text-warning"></i>Marketing
           </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="marketingDropdown" style="min-width: 250px;">
-            <li><a class="dropdown-item" href="{{ url_for('main.marketing') }}">
-              <i class="fas fa-chart-line me-2 text-warning"></i>Marketing Overview
-            </a></li>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="marketingDropdown">
+         
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{{ url_for('main.seo') }}">
               <i class="fas fa-search me-2 text-info"></i>SEO Services
             </a></li>
             <li><a class="dropdown-item" href="{{ url_for('main.social_media') }}">
-              <i class="fab fa-instagram me-2 text-danger"></i>Social Media Marketing
+              <i class="fab fa-instagram me-2" style="color: #E4405F;"></i>Social Media
             </a></li>
             <li><a class="dropdown-item" href="{{ url_for('main.ppc') }}">
-              <i class="fab fa-google me-2 text-success"></i>PPC & Google Ads
+              <i class="fab fa-google me-2 text-success"></i>PPC & Ads
             </a></li>
             <li><a class="dropdown-item" href="{{ url_for('main.content_marketing') }}">
               <i class="fas fa-blog me-2 text-primary"></i>Content Marketing
             </a></li>
             <li><a class="dropdown-item" href="{{ url_for('main.marketing_analytics') }}">
-              <i class="fas fa-chart-bar me-2 text-warning"></i>Analytics & Reporting
+              <i class="fas fa-chart-bar me-2 text-warning"></i>Analytics
             </a></li>
           </ul>
         </li>
 
-        <!-- Services Dropdown -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" 
+          <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
              data-bs-toggle="dropdown" aria-expanded="false">
             Services
           </a>
@@ -68,25 +59,40 @@
               <i class="fas fa-laptop-code me-2 text-success"></i>Software Development
             </a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item " href="{{ url_for('main.events') }}">
-              <i class="fas fa-handshake me-2 text-info"></i>Events (Partner Service)
+            <li><a class="dropdown-item" href="{{ url_for('main.events') }}">
+              <i class="fas fa-handshake me-2 text-info"></i>Events (Partner)
             </a></li>
           </ul>
         </li>
 
-        <!-- Contact -->
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('main.contact') }}">Contact</a>
         </li>
 
-        <!-- Admin Dropdown (only for admin users) -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="socialDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-share-alt me-1"></i>Follow Us
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="socialDropdown">
+         
+     
+            <li><a class="dropdown-item" href="https://www.instagram.com/aura_ai.tech/" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-instagram me-2" style="color: #E4405F;"></i>Instagram
+            </a></li>
+            <li><a class="dropdown-item" href="https://www.youtube.com/@AURA_DIGITAL_SOLUTIONS" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-youtube me-2" style="color: #FF0000;"></i>YouTube
+            </a></li>
+          </ul>
+        </li>
+
         {% if current_user.is_authenticated and current_user.is_admin %}
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-warning" href="#" id="adminDropdown" role="button" 
+          <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button"
              data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fas fa-crown me-1"></i>Admin
+            <i class="fas fa-crown me-1 text-warning"></i>Admin
           </a>
-          <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
             <li><a class="dropdown-item" href="{{ url_for('admin.dashboard') }}">
               <i class="fas fa-tachometer-alt me-2"></i>Dashboard
             </a></li>
@@ -107,32 +113,11 @@
         </li>
         {% endif %}
 
-        <!-- Auth -->
-        {% if current_user.is_authenticated %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
-               data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-user me-1"></i>{{ current_user.username }}
-              {% if current_user.is_admin %}
-                <i class="fas fa-crown text-warning ms-1" title="Admin"></i>
-              {% endif %}
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">
-                <i class="fas fa-sign-out-alt me-2"></i>Logout
-              </a></li>
-            </ul>
-          </li>
-        {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
-          </li>
-        {% endif %}
+
 
       </ul>
     </div>
   </div>
 </nav>
+
+<div style="height: 72px;"></div>

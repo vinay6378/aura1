@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask, redirect
-from extensions import db, login_manager
+from extensions import db, login_manager, mail
 from flask_migrate import Migrate
 from models import User   # also import Event if you need it in app.py
 import os
@@ -9,13 +9,22 @@ def create_app():
     app = Flask(__name__)
     
     # Basic configuration
-    app.config['SECRET_KEY'] = 'your-secret-key-here'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///aura.db'
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-here')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///aura.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    # Email Configuration
+    app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+    app.config['MAIL_PORT'] = 587
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME', 'gautamvinay939@gmail.com')
+    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD', '')  # Set this in environment
+    app.config['MAIL_DEFAULT_SENDER'] = ('Aura', 'gautamvinay939@gmail.com')
     
     # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
+    mail.init_app(app)
     login_manager.login_view = 'auth.login'
     
     # Flask-Migrate initialization

@@ -59,6 +59,26 @@ class ContactMessage(db.Model):
     message = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
+class ContactInquiry(db.Model):
+    """Track inquiries from various sections of the website"""
+    __tablename__ = "contact_inquiries"
+    
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    phone = db.Column(db.String(20))
+    inquiry_type = db.Column(db.String(100), nullable=False)  # general, service, project, support
+    message = db.Column(db.Text, nullable=False)
+    source_page = db.Column(db.String(200))  # Which page they came from
+    ip_address = db.Column(db.String(45))
+    status = db.Column(db.String(50), default='new')  # new, contacted, in_progress, closed
+    notes = db.Column(db.Text)  # Admin notes
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+    
+    def __repr__(self):
+        return f'<ContactInquiry {self.name} - {self.inquiry_type}>'
+
 class CareerApplication(db.Model):
     __tablename__ = "career_applications"
 
