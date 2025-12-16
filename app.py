@@ -31,7 +31,7 @@ def create_app():
     migrate = Migrate(app, db)
 
      #  IMPORT MODELS (CRITICAL)
-    from main.models import ContactInquiry
+    from models import ContactInquiry
     from models import User   # if User is in root models.py
 
     #  CREATE TABLES
