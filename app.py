@@ -30,6 +30,14 @@ def create_app():
     # Flask-Migrate initialization
     migrate = Migrate(app, db)
 
+     #  IMPORT MODELS (CRITICAL)
+    from main.models import ContactInquiry
+    from models import User   # if User is in root models.py
+
+    #  CREATE TABLES
+    with app.app_context():
+        db.create_all()
+
     # Register blueprints
     from main.routes import bp as main_bp
     from auth.routes import auth_bp
