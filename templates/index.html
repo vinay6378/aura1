@@ -1,0 +1,630 @@
+{% extends "base.html" %}
+{% block title %}Home - Aura Digital Solutions{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+  <div class="gradient-orb gradient-orb-1"></div>
+  <div class="gradient-orb gradient-orb-2"></div>
+  <div class="gradient-orb gradient-orb-3"></div>
+  <div class="spline-container">
+    <iframe 
+      
+      frameborder='0' 
+      width='100%' 
+      height='100%' 
+      style="position: absolute; top: 0; left: 0; pointer-events: none;">
+    </iframe>
+  </div>
+  <div class="container" style="position: relative; z-index: 10;">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 text-center">
+        <h1 class="display-3 fw-bold mb-4 fade-in hero-title typing-effect" style="color: rgba(255, 255, 255, 0.98); text-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+          Digital Solutions That <span class="highlight-text" style="color: rgba(255, 255, 255, 0.95);">Drive Results</span>
+        </h1>
+        <p class="lead mb-5 fade-in" style="color: rgba(255, 255, 255, 0.95); animation-delay: 0.2s; text-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+          We transform businesses through cutting-edge web development, innovative software solutions, and data-driven digital marketing strategies powered by AI.
+        </p>
+        <div class="d-flex justify-content-center gap-3" style="animation-delay: 0.4s;">
+          <a href="{{ url_for('main.about') }}" class="btn btn-white btn-lg btn-ripple hover-card">
+            <i class="fas fa-arrow-right me-2"></i>Explore Our Work
+          </a>
+          <a href="{{ url_for('main.contact') }}" class="btn btn-outline-white btn-lg btn-ripple hover-card" data-loading="Getting Started...">
+            <i class="fas fa-envelope me-2"></i>Get Started
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-lg-8 mx-auto">
+        <h2 class="section-title text-gradient">Our Core Services</h2>
+        <p class="section-subtitle">Comprehensive solutions designed to elevate your digital presence</p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card card card-3d hover-card">
+          <div class="card-img-top">
+            <i class="fas fa-code fa-4x text-white" style="position: relative; z-index: 1;"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-code me-2 text-primary"></i>Web Development
+            </h5>
+            <p class="card-text">Build responsive, scalable web applications with modern frameworks. From single-page apps to complex enterprise solutions, we deliver excellence.</p>
+            <ul class="list-unstyled mb-3" style="font-size: 0.9rem; color: var(--text-secondary);">
+              <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Responsive Design</li>
+              <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>Progressive Web Apps</li>
+              <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>E-commerce Solutions</li>
+              <li class="mb-2"><i class="fas fa-check text-primary me-2"></i>API Integration</li>
+            </ul>
+            <a href="{{ url_for('main.webdev') }}" class="btn btn-outline-primary">
+              <i class="fas fa-arrow-right me-2"></i>Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card card card-3d hover-card">
+          <div class="card-img-top" style="background: linear-gradient(135deg, var(--success-green), #059669);">
+            <i class="fas fa-laptop-code fa-4x text-white" style="position: relative; z-index: 1;"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-laptop-code me-2 text-success"></i>Software Development
+            </h5>
+            <p class="card-text">Custom software tailored to your business needs. We create powerful, efficient applications that streamline operations and boost productivity.</p>
+            <ul class="list-unstyled mb-3" style="font-size: 0.9rem; color: var(--text-secondary);">
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Custom Applications</li>
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Desktop Software</li>
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Business Automation</li>
+              <li class="mb-2"><i class="fas fa-check text-success me-2"></i>AI/ML Integration</li>
+            </ul>
+            <a href="{{ url_for('main.software') }}" class="btn btn-outline-success">
+              <i class="fas fa-arrow-right me-2"></i>Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card card card-3d hover-card">
+          <div class="card-img-top" style="background: linear-gradient(135deg, var(--accent-gold), #ea580c);">
+            <i class="fas fa-chart-line fa-4x text-white" style="position: relative; z-index: 1;"></i>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <i class="fas fa-chart-line me-2 text-warning"></i>Digital Marketing
+            </h5>
+            <p class="card-text">Data-driven marketing strategies that deliver measurable results. Grow your brand, reach your audience, and maximize your ROI with AI-powered campaigns.</p>
+            <ul class="list-unstyled mb-3" style="font-size: 0.9rem; color: var(--text-secondary);">
+              <li class="mb-2"><i class="fas fa-check text-warning me-2"></i>SEO Optimization</li>
+              <li class="mb-2"><i class="fas fa-check text-warning me-2"></i>Social Media Marketing</li>
+              <li class="mb-2"><i class="fas fa-check text-warning me-2"></i>PPC Campaigns</li>
+              <li class="mb-2"><i class="fas fa-check text-warning me-2"></i>Content Strategy</li>
+            </ul>
+            <a href="{{ url_for('main.marketing') }}" class="btn btn-outline-warning">
+              <i class="fas fa-arrow-right me-2"></i>Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-6">
+        <div class="stat-item">
+          <div class="stat-number count-up" data-target="150" data-duration="2000">0</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="stat-item">
+          <div class="stat-number count-up" data-target="100" data-duration="2000">0</div>
+          <div class="stat-label">Client Satisfaction %</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="stat-item">
+          <div class="stat-number count-up" data-target="25" data-duration="2000">0</div>
+          <div class="stat-label">Team Members</div>
+        </div>
+      </div>
+      <div class="col-md-3 col-6">
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label"> Support Available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-lg-8 mx-auto">
+        <h2 class="section-title text-gradient">Why Choose Aura?</h2>
+        <p class="section-subtitle">We combine creativity, technology, and strategy to deliver exceptional results</p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="feature-box fade-in-up">
+          <div class="feature-icon">
+            <i class="fas fa-rocket fa-2x text-white"></i>
+          </div>
+          <h5>Fast Delivery</h5>
+          <p class="text-muted mb-0">Quick turnaround times without compromising on quality or attention to detail.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="feature-box fade-in-up">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt fa-2x text-white"></i>
+          </div>
+          <h5>Secure & Reliable</h5>
+          <p class="text-muted mb-0">Enterprise-grade security and reliability you can trust for your business.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="feature-box fade-in-up">
+          <div class="feature-icon">
+            <i class="fas fa-robot fa-2x text-white"></i>
+          </div>
+          <h5>AI-Powered</h5>
+          <p class="text-muted mb-0">Advanced AI/ML features integrated into every solution for superior results.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="feature-box fade-in-up">
+          <div class="feature-icon">
+            <i class="fas fa-headset fa-2x text-white"></i>
+          </div>
+          <h5>24/7 Support</h5>
+          <p class="text-muted mb-0">Round-the-clock assistance with AI chatbot and human experts available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-lg-8 mx-auto">
+        <h2 class="section-title text-gradient">Trusted Partners</h2>
+        <p class="section-subtitle">We collaborate with industry leaders to provide comprehensive solutions</p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="partner-card hover-card">
+          <div class="partner-logo">
+            <i class="fas fa-tent fa-3x text-white"></i>
+          </div>
+          <h5 class="text-primary mb-3">Vinayak Tent & Events</h5>
+          <p class="text-muted mb-3">Your trusted partner for exceptional events and unforgettable experiences. From corporate gatherings to luxury celebrations.</p>
+          <div class="d-flex gap-2 justify-content-center flex-wrap">
+            <span class="badge bg-primary">Corporate Events</span>
+            <span class="badge bg-success">Weddings</span>
+            <span class="badge bg-warning text-white">Parties</span>
+            <span class="badge bg-info text-white">Exhibitions</span>
+          </div>
+          <a href="{{ url_for('main.events') }}" class="btn btn-outline-primary mt-3">
+            <i class="fas fa-arrow-right me-2"></i>View Events
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="partner-card hover-card">
+          <div class="partner-logo">
+            <i class="fas fa-handshake fa-3x text-white"></i>
+          </div>
+          <h5 class="mb-3">Strategic Partnerships</h5>
+          <p class="text-muted mb-3">We maintain a network of trusted partners across various industries to deliver comprehensive, integrated solutions.</p>
+          <div class="row text-start mt-4">
+            <div class="col-6 mb-2">
+              <small><i class="fas fa-check text-success me-2"></i>Quality Assured</small>
+            </div>
+            <div class="col-6 mb-2">
+              <small><i class="fas fa-check text-success me-2"></i>Seamless Integration</small>
+            </div>
+            <div class="col-6 mb-2">
+              <small><i class="fas fa-check text-success me-2"></i>Verified Partners</small>
+            </div>
+            <div class="col-6 mb-2">
+              <small><i class="fas fa-check text-success me-2"></i>End-to-End Solutions</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container text-center" style="position: relative; z-index: 1;">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h2 class="mb-4">Ready to Transform Your Business?</h2>
+        <p class="lead mb-5">Join hundreds of satisfied clients who trust Aura with their digital transformation. Let's build something amazing together.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+          <a href="{{ url_for('auth.login') }}" class="btn btn-white btn-lg btn-ripple hover-card">
+            <i class="fas fa-sign-in-alt me-2"></i>Get Started Free
+          </a>
+          <a href="{{ url_for('main.contact') }}" class="btn btn-outline-white btn-lg btn-ripple hover-card">
+            <i class="fas fa-comments me-2"></i>Talk to an Expert
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_head %}
+<style>
+.spline-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* AI Neural Network Background */
+.neural-network {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.neural-node {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  animation: pulse-node 3s ease-in-out infinite;
+}
+
+@keyframes pulse-node {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+.neural-connection {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform-origin: left center;
+  animation: flow 4s linear infinite;
+}
+
+@keyframes flow {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 100%;
+  }
+}
+
+/* Floating gradient orbs */
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+  animation: float-orb 15s ease-in-out infinite;
+}
+
+.gradient-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.6), transparent);
+  top: -10%;
+  left: -10%;
+  animation-delay: 0s;
+}
+
+.gradient-orb-2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.6), transparent);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: 5s;
+}
+
+.gradient-orb-3 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.4), transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 10s;
+}
+
+@keyframes float-orb {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(50px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-50px, 50px) scale(0.9);
+  }
+}
+
+/* Highlight text animation */
+.highlight-text {
+  position: relative;
+  display: inline-block;
+}
+
+.highlight-text::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, white, transparent);
+  animation: highlight-flow 3s ease-in-out infinite;
+}
+
+@keyframes highlight-flow {
+  0%, 100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+}
+
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button styles */
+.btn-white {
+  background-color: white !important;
+  color: #333 !important;
+  border: 2px solid white;
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-white:hover {
+  background-color: transparent !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.btn-outline-white {
+  background-color: transparent !important;
+  color: white !important;
+  border: 2px solid white;
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline-white:hover {
+  background-color: white !important;
+  color: #333 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.btn-lg {
+  font-size: 1.125rem;
+  padding: 15px 35px;
+}
+
+.hover-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.hover-card:hover::before {
+  left: 100%;
+}
+
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Enhanced AI/ML Neural Network Animation
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof anime !== 'undefined') {
+    // Animate gradient orbs
+    anime({
+      targets: '.gradient-orb',
+      scale: [1, 1.2, 1],
+      opacity: [0.3, 0.5, 0.3],
+      duration: 8000,
+      loop: true,
+      easing: 'easeInOutQuad',
+      delay: anime.stagger(2000)
+    });
+
+    // Add stagger animation to service cards on scroll
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const cards = entry.target.querySelectorAll('.service-card');
+          anime({
+            targets: cards,
+            translateY: [100, 0],
+            opacity: [0, 1],
+            rotate: [10, 0],
+            scale: [0.8, 1],
+            duration: 1200,
+            delay: anime.stagger(200),
+            easing: 'easeOutElastic(1, .8)'
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const serviceSection = document.querySelector('.py-5.bg-light');
+    if (serviceSection) {
+      observer.observe(serviceSection);
+    }
+
+    // Animate feature boxes
+    const featureObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          anime({
+            targets: entry.target,
+            scale: [0.8, 1],
+            opacity: [0, 1],
+            translateY: [50, 0],
+            duration: 800,
+            easing: 'easeOutCubic'
+          });
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-box').forEach(box => {
+      featureObserver.observe(box);
+    });
+
+    // Parallax effect on scroll for orbs
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const orbs = document.querySelectorAll('.gradient-orb');
+      orbs.forEach((orb, index) => {
+        const speed = 0.3 + (index * 0.1);
+        orb.style.transform = `translateY(${scrollY * speed}px)`;
+      });
+    });
+
+    // Add micro-interactions to buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mouseenter', function() {
+        anime({
+          targets: this,
+          scale: 1.1,
+          duration: 300,
+          easing: 'easeOutCubic'
+        });
+      });
+
+      btn.addEventListener('mouseleave', function() {
+        anime({
+          targets: this,
+          scale: 1,
+          duration: 300,
+          easing: 'easeOutCubic'
+        });
+      });
+
+      btn.addEventListener('click', function() {
+        anime({
+          targets: this,
+          scale: [1, 0.95, 1],
+          duration: 300,
+          easing: 'easeInOutQuad'
+        });
+      });
+    });
+  }
+
+  console.log('🚀 Index page animations enhanced!');
+});
+</script>
+{% endblock %}

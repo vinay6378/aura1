@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Chatbot Logs - Admin{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">Chatbot Conversation Logs</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>All Conversations</h5>
+                </div>
+                <div class="card-body">
+                    {% if conversations %}
+                        {% for conversation in conversations %}
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>{{ conversation.user_name or 'Anonymous User' }}</strong>
+                                        {% if conversation.service_requested %}
+                                            <span class="badge bg-info ms-2">{{ conversation.service_requested }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6 text-end">
+                                        <small class="text-muted">{{ conversation.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                                        <span class="badge bg-secondary ms-2">{{ conversation.status }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <strong>Email:</strong> {{ conversation.user_email or 'Not provided' }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Phone:</strong> {{ conversation.user_phone or 'Not provided' }}
+                                    </div>
+                                </div>
+                                
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <strong>Session ID:</strong> {{ conversation.session_id }}
+                                    </div>
+                                </div>
+                                
+                                {% if conversation.messages %}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6>Conversation Messages:</h6>
+                                        {% for message in conversation.messages %}
+                                        <div class="mb-2 p-2 rounded {% if message.sender == 'user' %}bg-light{% else %}bg-info bg-opacity-10{% endif %}">
+                                            <strong>{{ message.sender.title() }}:</strong> {{ message.message_text }}
+                                            <small class="text-muted d-block">{{ message.created_at.strftime('%H:%M:%S') }}</small>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">No chatbot conversations found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

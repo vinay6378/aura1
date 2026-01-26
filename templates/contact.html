@@ -1,0 +1,414 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | Aura{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="text-center mb-5">
+        <h1 class="fw-bold mb-4 display-4 text-gradient animate__animated animate__fadeInUp">Get in Touch</h1>
+        <p class="lead mb-4 text-muted animate__animated animate__fadeInUp animate__delay-1s">
+          We'd love to hear from you! Fill out the form below and our team will get back to you soon.
+        </p>
+        <div class="row justify-content-center mb-4">
+          <div class="col-md-8">
+            <div class="row g-3">
+              <div class="col-4">
+                <div class="stat-card animate__animated animate__fadeInUp animate__delay-2s">
+                  <div class="stat-number">24/7</div>
+                  <div class="stat-label">Support</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="stat-card animate__animated animate__fadeInUp animate__delay-2s">
+                  <div class="stat-number">100+</div>
+                  <div class="stat-label">Projects</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="stat-card animate__animated animate__fadeInUp animate__delay-2s">
+                  <div class="stat-number">5★</div>
+                  <div class="stat-label">Rating</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Contact Form -->
+        <div class="col-lg-8 mb-4">
+          <div class="card shadow-lg border-0 contact-form-card animate__animated animate__fadeInLeft">
+            <div class="card-body p-5">
+              <form method="post" action="{{ url_for('main.contact') }}" id="contactForm" class="needs-validation" novalidate>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label fw-semibold">
+                      <i class="fas fa-user me-2 text-primary"></i>Full Name
+                    </label>
+                    <input type="text" class="form-control form-control-lg" id="name" name="name" 
+                           placeholder="John Doe" required 
+                           style="border-radius: var(--border-radius); border: 2px solid var(--gray-200); padding: 12px 16px;">
+                    <div class="invalid-feedback">Please provide your name.</div>
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label fw-semibold">
+                      <i class="fas fa-envelope me-2 text-primary"></i>Email Address
+                    </label>
+                    <input type="email" class="form-control form-control-lg" id="email" name="email" 
+                           placeholder="you@example.com" required
+                           style="border-radius: var(--border-radius); border: 2px solid var(--gray-200); padding: 12px 16px;">
+                    <div class="invalid-feedback">Please provide a valid email.</div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="phone" class="form-label fw-semibold">
+                      <i class="fas fa-phone me-2 text-primary"></i>Phone Number
+                    </label>
+                    <input type="tel" class="form-control form-control-lg" id="phone" name="phone" 
+                           placeholder="+91 98765 43210"
+                           style="border-radius: var(--border-radius); border: 2px solid var(--gray-200); padding: 12px 16px;">
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="inquiry_type" class="form-label fw-semibold">
+                      <i class="fas fa-tag me-2 text-primary"></i>Inquiry Type
+                    </label>
+                    <select class="form-select form-select-lg" id="inquiry_type" name="inquiry_type" required
+                            style="border-radius: var(--border-radius); border: 2px solid var(--gray-200); padding: 12px 16px;">
+                      <option value="">Select type...</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="web">Web Development</option>
+                      <option value="software">Software Development</option>
+                      <option value="marketing">Digital Marketing</option>
+                      <option value="support">Technical Support</option>
+                      <option value="partnership">Partnership</option>
+                    </select>
+                    <div class="invalid-feedback">Please select an inquiry type.</div>
+                  </div>
+                </div>
+
+                
+
+                <div class="mb-4">
+                  <label for="message" class="form-label fw-semibold">
+                    <i class="fas fa-comment me-2 text-primary"></i>Message
+                  </label>
+                  <textarea class="form-control form-control-lg" id="message" name="message" rows="5" 
+                            placeholder="Tell us more about your project or requirements..." required
+                            style="border-radius: var(--border-radius); border: 2px solid var(--gray-200); padding: 12px 16px; resize: vertical;"></textarea>
+                  <div class="form-text text-muted">
+                    <span id="charCount">0</span> / 500 characters
+                  </div>
+                  <div class="invalid-feedback">Please provide your message.</div>
+                </div>
+
+                
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-lg px-5" id="submitBtn">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    <span id="btnText">Send Message</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-lg-4">
+          <div class="card shadow border-0 contact-info-card animate__animated animate__fadeInRight mb-4">
+            <div class="card-body p-4">
+              <h5 class="fw-bold mb-4 text-gradient">Contact Information</h5>
+              
+              <div class="contact-item mb-4">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-details">
+                  <h6>Office Address</h6>
+                  <p class="mb-0 text-muted">305801, Mirja Bavdi Road,<br>Shastri Nagar, Madanganj-Kishangarh</p>
+                </div>
+              </div>
+
+              <div class="contact-item mb-4">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-details">
+                  <h6>Email Address</h6>
+                  <a href="mailto:vs8890864@gmail.com" class="text-primary text-decoration-none">
+                    vs8890864@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              <div class="contact-item mb-4">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="contact-details">
+                  <h6>Phone Number</h6>
+                  <a href="tel:+919079885925" class="text-primary text-decoration-none">
+                    +91 9079885925
+                  </a>
+                </div>
+              </div>
+
+              
+               
+
+          
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0">
+      <div class="modal-body text-center p-5">
+        <div class="success-icon mb-3">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h4 class="mb-3">Message Sent Successfully!</h4>
+        <p class="text-muted mb-4">Thank you for contacting us. We'll get back to you within 24 hours.</p>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+<style>
+  body {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    min-height: 100vh;
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #667eea;
+  }
+  
+  .stat-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+  
+  .contact-form-card {
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+  }
+  
+  .contact-info-card {
+    border-radius: 20px;
+    background: white;
+  }
+  
+  .quick-links-card {
+    border-radius: 20px;
+    background: white;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  
+  .contact-details h6 {
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .contact-details p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: white;
+    font-size: 2.5rem;
+    animation: scaleIn 0.5s ease;
+  }
+  
+  @keyframes scaleIn {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .form-control:focus, .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  }
+  
+  .btn-outline-primary:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: transparent;
+  }
+  
+  .loading-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Character counter
+const messageTextarea = document.getElementById('message');
+const charCount = document.getElementById('charCount');
+
+if (messageTextarea && charCount) {
+  messageTextarea.addEventListener('input', function() {
+    const length = this.value.length;
+    charCount.textContent = length;
+    
+    if (length > 500) {
+      this.value = this.value.substring(0, 500);
+      charCount.textContent = 500;
+    }
+  });
+}
+
+// Form validation and submission
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  if (!this.checkValidity()) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.classList.add('was-validated');
+    return;
+  }
+  
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('btnText');
+  
+  // Show loading state
+  submitBtn.disabled = true;
+  btnText.innerHTML = '<span class="loading-spinner"></span> Sending...';
+  
+  // Show success modal after a short delay (form will submit normally)
+  setTimeout(() => {
+    // Reset button
+    submitBtn.disabled = false;
+    btnText.textContent = 'Send Message';
+    
+    // Show success modal
+    const modal = new bootstrap.Modal(document.getElementById('successModal'));
+    modal.show();
+  }, 1000);
+});
+
+// Live chat function
+function openChat() {
+  // Placeholder for live chat functionality
+  alert('Live chat feature coming soon! Please contact us via email or phone.');
+}
+
+// Add smooth scroll animation
+window.addEventListener('load', function() {
+  // Animate elements on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+      }
+    });
+  }, observerOptions);
+  
+  // Observe all cards
+  document.querySelectorAll('.contact-form-card, .contact-info-card, .quick-links-card').forEach(card => {
+    observer.observe(card);
+  });
+});
+</script>
+{% endblock %}
