@@ -15,7 +15,6 @@ class User(UserMixin, db.Model):
     last_login = db.Column(db.DateTime)
     is_admin = db.Column(db.Boolean, default=False)
     is_active = db.Column(db.Boolean, default=True)
-    security_key = db.Column(db.String(255))  # For admin password recovery
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

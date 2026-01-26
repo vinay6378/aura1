@@ -9,7 +9,15 @@ def create_app():
     app = Flask(__name__)
     
     # Basic configuration
-    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-here')
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-here-change-in-production')
+    
+    # Production/Development configuration
+    if os.getenv('FLASK_ENV') == 'production':
+        app.config['DEBUG'] = False
+        app.config['TESTING'] = False
+    else:
+        app.config['DEBUG'] = True
+        app.config['TESTING'] = False
     
     #  CONFIGURE DATABASE
     if os.getenv("DATABASE_URL"):
@@ -35,10 +43,8 @@ def create_app():
     app.config['MAIL_DEFAULT_SENDER'] = ('Aura', 'gautamvinay939@gmail.com')
     
     # Initialize extensions
-    db.init_app(app)
-    login_manager.init_app(app)
-    mail.init_app(app)
-    login_manager.login_view = 'auth.login'
+    from extensions import init_extensions
+    init_extensions(app)
     
     # Flask-Migrate initialization
     migrate = Migrate(app, db)
@@ -64,6 +70,22 @@ def create_app():
     @app.route('/login')
     def login_redirect():
         return redirect('/auth/login')
+    
+    # Global context processor to make admin_exists available in all templates
+    @app.context_processor
+    def inject_admin_exists():
+        with app.app_context():
+            from models import User
+            admin_exists = User.query.filter_by(is_admin=True).first() is not None
+            print(f"DEBUG: admin_exists = {admin_exists}")  # Debug print
+            return dict(admin_exists=admin_exists)
+    
+    # Direct access route for testing
+    @app.route('/test-setup')
+    def test_setup():
+        from models import User
+        admin_exists = User.query.filter_by(is_admin=True).first() is not None
+        return f"Admin exists: {admin_exists}. Setup button should show: {not admin_exists}"
     
     return app
 

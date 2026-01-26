@@ -127,6 +127,21 @@
           </a>
         </li>
         {% endif %}
+        
+        <!-- DEBUG: {{ admin_exists }} -->
+        {% if not admin_exists %}
+        <li class="nav-item">
+          <a class="nav-link btn btn-warning btn-sm text-white ms-2" href="{{ url_for('main.setup_admin') }}" style="border-radius: 20px;">
+            <i class="fas fa-crown me-1"></i>Setup Admin
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <span class="nav-link text-muted ms-2">
+            <i class="fas fa-check me-1"></i>Admin Ready
+          </span>
+        </li>
+        {% endif %}
 
 
 
