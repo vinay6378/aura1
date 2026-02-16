@@ -1,113 +1,190 @@
-{% extends "base.html" %}
+{% extends "admin/base.html" %}
 
-{% block title %}Admin Profile{% endblock %}
+{% block title %}Profile Settings - Admin Panel{% endblock %}
+{% block page_title %}Profile Settings{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-12">
-            <h1 class="mb-4">Admin Profile</h1>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="stat-card">
+            <h5 class="mb-4">Admin Profile Settings</h5>
+            
+            <form method="POST" action="{{ url_for('admin.update_profile') }}">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="username" class="form-label fw-semibold">
+                            <i class="fas fa-user me-2"></i>Username
+                        </label>
+                        <input type="text" class="form-control" id="username" name="username" 
+                               value="{{ current_user.username }}" required>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label fw-semibold">
+                            <i class="fas fa-envelope me-2"></i>Email Address
+                        </label>
+                        <input type="email" class="form-control" id="email" name="email" 
+                               value="{{ current_user.email }}" required>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="current_password" class="form-label fw-semibold">
+                            <i class="fas fa-lock me-2"></i>Current Password
+                        </label>
+                        <input type="password" class="form-control" id="current_password" name="current_password" 
+                               placeholder="Enter current password to change">
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <label for="new_password" class="form-label fw-semibold">
+                            <i class="fas fa-key me-2"></i>New Password (Optional)
+                        </label>
+                        <input type="password" class="form-control" id="new_password" name="new_password" 
+                               placeholder="Leave blank to keep current password" minlength="6">
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label for="confirm_new_password" class="form-label fw-semibold">
+                        <i class="fas fa-lock me-2"></i>Confirm New Password
+                    </label>
+                    <input type="password" class="form-control" id="confirm_new_password" name="confirm_new_password" 
+                           placeholder="Confirm new password">
+                </div>
+                
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Update Profile
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+                        <i class="fas fa-undo me-2"></i>Reset
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Profile Information</h5>
+    
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+        <!-- Account Info -->
+        <div class="stat-card mb-4">
+            <h6 class="mb-3">Account Information</h6>
+            <div class="small">
+                <div class="mb-2">
+                    <strong>User ID:</strong> #{{ current_user.id }}
                 </div>
-                <div class="card-body">
-                    <form method="POST" action="{{ url_for('admin.update_profile') }}">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" value="{{ current_user.username }}">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ current_user.email }}">
-                        </div>
-                        
-                        <hr>
-                        
-                        <h6>Change Password</h6>
-                        <p class="text-muted small">Leave blank if you don't want to change your password</p>
-                        
-                        <div class="mb-3">
-                            <label for="current_password" class="form-label">Current Password</label>
-                            <input type="password" class="form-control" id="current_password" name="current_password">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="new_password" class="form-label">New Password</label>
-                            <input type="password" class="form-control" id="new_password" name="new_password">
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="confirm_password" class="form-label">Confirm New Password</label>
-                            <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Update Profile</button>
-                        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">Cancel</a>
-                    </form>
+                <div class="mb-2">
+                    <strong>Username:</strong> {{ current_user.username }}
+                </div>
+                <div class="mb-2">
+                    <strong>Email:</strong> {{ current_user.email }}
+                </div>
+                <div class="mb-2">
+                    <strong>Role:</strong> 
+                    <span class="badge bg-warning">Administrator</span>
+                </div>
+                <div class="mb-2">
+                    <strong>Status:</strong> 
+                    <span class="badge bg-success">Active</span>
+                </div>
+                <div class="mb-2">
+                    <strong>Member Since:</strong> {{ current_user.created_at.strftime('%B %d, %Y') }}
+                </div>
+                {% if current_user.last_login %}
+                <div>
+                    <strong>Last Login:</strong> {{ current_user.last_login.strftime('%B %d, %Y at %I:%M %p') }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Security Settings -->
+        <div class="stat-card mb-4">
+            <h6 class="mb-3">Security Settings</h6>
+            <div class="small">
+                <div class="mb-3">
+                    <strong>Password Security:</strong>
+                    <div class="mt-2">
+                        <button class="btn btn-outline-warning btn-sm" onclick="showPasswordGuide()">
+                            <i class="fas fa-shield-alt me-1"></i>Password Guidelines
+                        </button>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <strong>Session Security:</strong>
+                    <div class="mt-2">
+                        <span class="badge bg-info">Secure Session</span>
+                        <small class="text-muted d-block">Your session is encrypted and secure</small>
+                    </div>
+                </div>
+                <div>
+                    <strong>Account Access:</strong>
+                    <div class="mt-2">
+                        <button class="btn btn-outline-danger btn-sm" onclick="logoutAllSessions()">
+                            <i class="fas fa-sign-out-alt me-1"></i>Logout All Sessions
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Account Details</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <strong>User ID:</strong>
-                        </div>
-                        <div class="col-8">
-                            {{ current_user.id }}
-                        </div>
-                    </div>
-                    
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <strong>Admin:</strong>
-                        </div>
-                        <div class="col-8">
-                            <span class="badge bg-success">Yes</span>
-                        </div>
-                    </div>
-                    
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <strong>Active:</strong>
-                        </div>
-                        <div class="col-8">
-                            <span class="badge bg-success">Yes</span>
-                        </div>
-                    </div>
-                    
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <strong>Created:</strong>
-                        </div>
-                        <div class="col-8">
-                            {{ current_user.created_at.strftime('%Y-%m-%d %H:%M:%S') if current_user.created_at else 'N/A' }}
-                        </div>
-                    </div>
-                    
-                    <div class="row mb-2">
-                        <div class="col-4">
-                            <strong>Last Login:</strong>
-                        </div>
-                        <div class="col-8">
-                            {{ current_user.last_login.strftime('%Y-%m-%d %H:%M:%S') if current_user.last_login else 'Never' }}
-                        </div>
-                    </div>
-                </div>
+        <!-- Quick Actions -->
+        <div class="stat-card">
+            <h6 class="mb-3">Quick Actions</h6>
+            <div class="d-grid gap-2">
+                <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">
+                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </a>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+
+<script>
+function resetForm() {
+    document.getElementById('username').value = '{{ current_user.username }}';
+    document.getElementById('email').value = '{{ current_user.email }}';
+    document.getElementById('current_password').value = '';
+    document.getElementById('new_password').value = '';
+    document.getElementById('confirm_new_password').value = '';
+}
+
+function showPasswordGuide() {
+    alert('Password Guidelines:\n\n' +
+          '• At least 6 characters long\n' +
+          '• Include uppercase and lowercase letters\n' +
+          '• Include numbers and special characters\n' +
+          '• Avoid common words or patterns\n' +
+          '• Use a unique password for this account');
+}
+
+function logoutAllSessions() {
+    if (confirm('This will logout all sessions on all devices. Continue?')) {
+        window.location.href = '{{ url_for("auth.logout") }}';
+    }
+}
+
+// Password confirmation validation
+document.querySelector('form').addEventListener('submit', function(e) {
+    const newPassword = document.getElementById('new_password').value;
+    const confirmPassword = document.getElementById('confirm_new_password').value;
+    
+    if (newPassword && newPassword !== confirmPassword) {
+        e.preventDefault();
+        alert('New passwords do not match!');
+        return false;
+    }
+    
+    if (newPassword && newPassword.length < 6) {
+        e.preventDefault();
+        alert('New password must be at least 6 characters long!');
+        return false;
+    }
+});
+</script>

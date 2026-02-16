@@ -1,0 +1,180 @@
+{% extends "admin/base.html" %}
+
+{% block title %}View Message - Admin Panel{% endblock %}
+{% block page_title %}View Message{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="stat-card">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+                <h5 class="mb-0">Message Details</h5>
+                <div class="table-actions">
+                    <button class="btn-action btn btn-sm btn-outline-warning" onclick="toggleMessageStatus('{{ message.id }}')" title="Change Status">
+                        <i class="fas fa-exchange-alt"></i>
+                    </button>
+                    <form method="POST" action="{{ url_for('admin.delete_message', message_id=message.id) }}" style="display: inline;">
+                        <button type="submit" class="btn-action btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this message?')" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Message Header -->
+            <div class="border-bottom pb-3 mb-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; font-size: 20px;">
+                                {{ message.name[0].upper() if message.name else 'U' }}
+                            </div>
+                            <div>
+                                <h6 class="mb-1">{{ message.name }}</h6>
+                                <p class="text-muted mb-0">{{ message.email }}</p>
+                                {% if message.phone %}
+                                <p class="text-muted mb-0"><i class="fas fa-phone me-1"></i>{{ message.phone }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-end">
+                            <div class="mb-2">
+                                <span class="badge bg-{{ 'danger' if message.priority == 'high' else 'warning' if message.priority == 'medium' else 'info' }}">
+                                    {{ message.priority.title() }} Priority
+                                </span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="badge bg-{{ 'success' if message.status == 'responded' else 'warning' if message.status == 'pending' else 'info' if message.status == 'new' else 'secondary' }}">
+                                    {{ message.status.title() }}
+                                </span>
+                            </div>
+                            <div>
+                                <small class="text-muted">
+                                    <i class="fas fa-clock me-1"></i>
+                                    {{ message.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                                </small>
+                            </div>
+                            {% if message.read_at %}
+                            <div>
+                                <small class="text-success">
+                                    <i class="fas fa-envelope-open me-1"></i>
+                                    Read on {{ message.read_at.strftime('%B %d, %Y at %I:%M %p') }}
+                                </small>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Subject -->
+            <div class="mb-4">
+                <h6 class="text-muted mb-2">Subject</h6>
+                <h5>{{ message.subject }}</h5>
+            </div>
+            
+            <!-- Message Content -->
+            <div class="mb-4">
+                <h6 class="text-muted mb-2">Message</h6>
+                <div class="border rounded p-3 bg-light">
+                    {{ message.message.replace('\n', '<br>') }}
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="d-flex gap-2">
+                <a href="mailto:{{ message.email }}?subject=Re: {{ message.subject }}" class="btn btn-primary">
+                    <i class="fas fa-reply me-2"></i>Reply via Email
+                </a>
+                <button class="btn btn-outline-success" onclick="markAsResponded('{{ message.id }}')">
+                    <i class="fas fa-check me-2"></i>Mark as Responded
+                </button>
+                <button class="btn btn-outline-secondary" onclick="markAsClosed('{{ message.id }}')">
+                    <i class="fas fa-archive me-2"></i>Mark as Closed
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+        <!-- Quick Actions -->
+        <div class="stat-card mb-4">
+            <h6 class="mb-3">Quick Actions</h6>
+            <div class="d-grid gap-2">
+                <a href="{{ url_for('admin.messages') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-list me-2"></i>Back to Messages
+                </a>
+                <a href="mailto:{{ message.email }}" class="btn btn-success">
+                    <i class="fas fa-envelope me-2"></i>Send Email
+                </a>
+                {% if message.phone %}
+                <a href="tel:{{ message.phone }}" class="btn btn-info">
+                    <i class="fas fa-phone me-2"></i>Call Client
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Message Info -->
+        <div class="stat-card">
+            <h6 class="mb-3">Message Information</h6>
+            <div class="small">
+                <div class="mb-2">
+                    <strong>Message ID:</strong> #{{ message.id }}
+                </div>
+                <div class="mb-2">
+                    <strong>Status:</strong> 
+                    <span class="badge bg-{{ 'success' if message.status == 'responded' else 'warning' if message.status == 'pending' else 'info' if message.status == 'new' else 'secondary' }}">
+                        {{ message.status.title() }}
+                    </span>
+                </div>
+                <div class="mb-2">
+                    <strong>Priority:</strong> 
+                    <span class="badge bg-{{ 'danger' if message.priority == 'high' else 'warning' if message.priority == 'medium' else 'info' }}">
+                        {{ message.priority.title() }}
+                    </span>
+                </div>
+                <div class="mb-2">
+                    <strong>Source:</strong> Contact Form
+                </div>
+                <div>
+                    <strong>IP Address:</strong> 
+                    <span class="text-muted">{{ message.ip_address or 'Not recorded' }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+function toggleMessageStatus(messageId) {
+    fetch(`/admin/messages/${messageId}/toggle-status`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to update message status');
+    });
+}
+
+function markAsResponded(messageId) {
+    // Implementation to mark as responded
+    alert('Mark as responded functionality would be implemented here');
+}
+
+function markAsClosed(messageId) {
+    // Implementation to mark as closed
+    alert('Mark as closed functionality would be implemented here');
+}
+</script>

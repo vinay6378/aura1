@@ -1,0 +1,205 @@
+{% extends "admin/base.html" %}
+
+{% block title %}View Conversation - Admin Panel{% endblock %}
+{% block page_title %}View Chatbot Conversation{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="stat-card">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+                <div>
+                    <h5 class="mb-1">Conversation with {{ conversation.user_name or 'Anonymous' }}</h5>
+                    <p class="text-muted mb-0">{{ conversation.user_email or 'No email provided' }}</p>
+                    {% if conversation.user_phone %}
+                    <p class="text-muted mb-0"><i class="fas fa-phone me-1"></i>{{ conversation.user_phone }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <span class="badge bg-{{ 'success' if conversation.status == 'completed' else 'warning' if conversation.status == 'follow_up' else 'info' }}">
+                        {{ conversation.status.replace('_', ' ').title() }}
+                    </span>
+                    <form method="POST" action="{{ url_for('admin.delete_conversation', conversation_id=conversation.id) }}" style="display: inline; margin-left: 10px;">
+                        <button type="submit" class="btn-action btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this conversation?')" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Conversation Info -->
+            <div class="border-bottom pb-3 mb-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <strong>Service Requested:</strong> {{ conversation.service_requested or 'General Inquiry' }}
+                        </div>
+                        <div class="mb-2">
+                            <strong>Session ID:</strong> {{ conversation.session_id }}
+                        </div>
+                        <div>
+                            <strong>Started:</strong> {{ conversation.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <strong>Last Activity:</strong> {{ conversation.last_activity.strftime('%B %d, %Y at %I:%M %p') }}
+                        </div>
+                        {% if conversation.duration_seconds %}
+                        <div class="mb-2">
+                            <strong>Duration:</strong> {{ (conversation.duration_seconds // 60) }}m {{ (conversation.duration_seconds % 60) }}s
+                        </div>
+                        {% endif %}
+                        <div>
+                            <strong>Messages:</strong> {{ messages|length }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Messages -->
+            <div class="chat-messages" style="max-height: 500px; overflow-y: auto;">
+                <h6 class="mb-3">Conversation History</h6>
+                {% for message in messages %}
+                <div class="d-flex mb-3 {% if message.sender == 'user' %}justify-content-end{% else %}justify-content-start{% endif %}">
+                    {% set message_style = 'max-width: 70%;' + ('margin-left: auto;' if message.sender == 'user' else '') %}
+                    <div class="rounded-3 p-3 {% if message.sender == 'user' %}bg-primary text-white{% else %}bg-light{% endif %}" 
+                         style="{{ message_style }}">
+                        <div class="d-flex justify-content-between align-items-start mb-1">
+                            {% set text_class = 'text-white' if message.sender == 'user' else 'text-muted' %}
+                            <strong class="{{ text_class }}">
+                                {{ message.sender.title() }}
+                            </strong>
+                            <small class="{{ text_class }}">
+                                {{ message.created_at.strftime('%I:%M %p') }}
+                            </small>
+                        </div>
+                        {% set message_text_class = 'text-white' if message.sender == 'user' else 'text-dark' %}
+                        <div class="{{ message_text_class }}">
+                            {{ message.message_text }}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="d-flex gap-2 mt-4">
+                {% if conversation.user_email %}
+                <a href="mailto:{{ conversation.user_email }}?subject=Following up on your Aura inquiry" class="btn btn-primary">
+                    <i class="fas fa-reply me-2"></i>Follow Up via Email
+                </a>
+                {% endif %}
+                {% if conversation.user_phone %}
+                <a href="tel:{{ conversation.user_phone }}" class="btn btn-info">
+                    <i class="fas fa-phone me-2"></i>Call Client
+                </a>
+                {% endif %}
+                <button class="btn btn-outline-success" onclick="markAsCompleted('{{ conversation.id }}')">
+                    <i class="fas fa-check me-2"></i>Mark as Completed
+                </button>
+                <button class="btn btn-outline-warning" onclick="markForFollowUp('{{ conversation.id }}')">
+                    <i class="fas fa-clock me-2"></i>Schedule Follow Up
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+        <!-- Quick Actions -->
+        <div class="stat-card mb-4">
+            <h6 class="mb-3">Quick Actions</h6>
+            <div class="d-grid gap-2">
+                <a href="{{ url_for('admin.chatbot') }}" class="btn btn-outline-success">
+                    <i class="fas fa-list me-2"></i>Back to Conversations
+                </a>
+                {% if conversation.user_email %}
+                <a href="mailto:{{ conversation.user_email }}" class="btn btn-primary">
+                    <i class="fas fa-envelope me-2"></i>Send Email
+                </a>
+                {% endif %}
+                {% if conversation.user_phone %}
+                <a href="tel:{{ conversation.user_phone }}" class="btn btn-info">
+                    <i class="fas fa-phone me-2"></i>Call Client
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Conversation Info -->
+        <div class="stat-card">
+            <h6 class="mb-3">Conversation Information</h6>
+            <div class="small">
+                <div class="mb-2">
+                    <strong>Conversation ID:</strong> #{{ conversation.id }}
+                </div>
+                <div class="mb-2">
+                    <strong>Status:</strong> 
+                    <span class="badge bg-{{ 'success' if conversation.status == 'completed' else 'warning' if conversation.status == 'follow_up' else 'info' }}">
+                        {{ conversation.status.replace('_', ' ').title() }}
+                    </span>
+                </div>
+                <div class="mb-2">
+                    <strong>Service:</strong> {{ conversation.service_requested or 'General Inquiry' }}
+                </div>
+                <div class="mb-2">
+                    <strong>Messages:</strong> {{ messages|length }}
+                </div>
+                <div class="mb-2">
+                    <strong>Duration:</strong> 
+                    {% if conversation.duration_seconds %}
+                        {{ (conversation.duration_seconds // 60) }}m {{ (conversation.duration_seconds % 60) }}s
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </div>
+                <div class="mb-2">
+                    <strong>Started:</strong> {{ conversation.created_at.strftime('%B %d, %Y at %I:%M %p') }}
+                </div>
+                <div>
+                    <strong>Last Activity:</strong> {{ conversation.last_activity.strftime('%B %d, %Y at %I:%M %p') }}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Client Info -->
+        {% if conversation.user_name or conversation.user_email or conversation.user_phone %}
+        <div class="stat-card">
+            <h6 class="mb-3">Client Information</h6>
+            <div class="small">
+                {% if conversation.user_name %}
+                <div class="mb-2">
+                    <strong>Name:</strong> {{ conversation.user_name }}
+                </div>
+                {% endif %}
+                {% if conversation.user_email %}
+                <div class="mb-2">
+                    <strong>Email:</strong> 
+                    <a href="mailto:{{ conversation.user_email }}">{{ conversation.user_email }}</a>
+                </div>
+                {% endif %}
+                {% if conversation.user_phone %}
+                <div>
+                    <strong>Phone:</strong> 
+                    <a href="tel:{{ conversation.user_phone }}">{{ conversation.user_phone }}</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+<script>
+function markAsCompleted(conversationId) {
+    // Implementation to mark as completed
+    alert('Mark as completed functionality would be implemented here');
+}
+
+function markForFollowUp(conversationId) {
+    // Implementation to schedule follow up
+    alert('Schedule follow up functionality would be implemented here');
+}
+</script>

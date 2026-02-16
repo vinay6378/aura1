@@ -2,7 +2,7 @@
 from flask import Flask, redirect
 from extensions import db, login_manager, mail
 from flask_migrate import Migrate
-from models import User   # also import Event if you need it in app.py
+from models import User, Event   # Import User and Event models
 import os
 
 def create_app():
@@ -63,13 +63,14 @@ def create_app():
     from api.routes import api_bp
     
     app.register_blueprint(main_bp)
-    app.register_blueprint(auth_bp, url_prefix="/auth")
-    app.register_blueprint(admin_bp, url_prefix="/admin")
-    app.register_blueprint(api_bp, url_prefix="/api")
     
     @app.route('/login')
     def login_redirect():
         return redirect('/auth/login')
+    
+    app.register_blueprint(auth_bp, url_prefix="/auth")
+    app.register_blueprint(admin_bp, url_prefix="/admin")
+    app.register_blueprint(api_bp, url_prefix="/api")
     
     # Global context processor to make admin_exists available in all templates
     @app.context_processor
@@ -77,15 +78,7 @@ def create_app():
         with app.app_context():
             from models import User
             admin_exists = User.query.filter_by(is_admin=True).first() is not None
-            print(f"DEBUG: admin_exists = {admin_exists}")  # Debug print
             return dict(admin_exists=admin_exists)
-    
-    # Direct access route for testing
-    @app.route('/test-setup')
-    def test_setup():
-        from models import User
-        admin_exists = User.query.filter_by(is_admin=True).first() is not None
-        return f"Admin exists: {admin_exists}. Setup button should show: {not admin_exists}"
     
     return app
 
